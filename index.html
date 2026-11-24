@@ -5,7 +5,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aluna Residences · Mayto">
 <meta property="og:description" content="Diez residencias frente al mar en la playa virgen de Mayto, Jalisco. Explora la torre piso por piso y recorre cada residencia en 3D.">
-<meta property="og:image" content="https://alunabymayto.vercel.app/og-r2.jpg">
+<meta property="og:image" content="https://alunabymayto.vercel.app/og-r3.jpg">
 <meta property="og:url" content="https://alunabymayto.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -298,18 +298,17 @@ figcaption{font:600 10px/1.4 var(--f-label); letter-spacing:.22em; text-transfor
 #contacto .grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(36px,6vw,96px)}
 #contacto h2{font-size:clamp(32px,4.4vw,62px); margin-top:22px}
 .price{margin-top:28px; font:400 clamp(26px,2.6vw,36px)/1.1 var(--f-display)}
+.price .from{display:block; color:var(--mute); margin-bottom:8px}
 .price small{display:block; font:400 14px/1.5 var(--f-body); color:var(--mute); margin-top:6px}
-.plans{display:grid; border-top:1px solid var(--line)}
-.plan-p{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px 18px; padding:18px 0; border-bottom:1px solid var(--line)}
-.plan-p b{font:400 21px/1.2 var(--f-display)}
-.plan-p span{color:var(--mute); font-size:15px; grid-column:1 / -1}
-.plan-p em{font:600 10px/1.8 var(--f-label); letter-spacing:.2em; text-transform:uppercase; font-style:normal; color:var(--gold)}
 .reach{margin-top:34px; display:grid; gap:12px}
 .line{display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px}
 .line .label{color:var(--mute); min-width:9em}
 .line .v{font:400 20px/1.2 var(--f-display); user-select:all}
 .copy{font:600 10px/1 var(--f-label); letter-spacing:.2em; text-transform:uppercase; background:none; color:var(--ink); border:1px solid var(--line); padding:9px 12px; cursor:pointer}
 .copy:hover{border-color:var(--ink)}
+.ctas{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
+.ctas .btn{margin-top:0}
+.btn.ghost{background:none; color:var(--ink); border:1px solid var(--ink); padding:16px 21px}
 .btn{display:inline-flex; align-items:center; gap:10px; margin-top:28px; font:600 11px/1 var(--f-label); letter-spacing:.24em; text-transform:uppercase; text-decoration:none; color:var(--moon); background:var(--ink); padding:17px 22px}
 footer{padding-block:40px; border-top:1px solid var(--line); background:var(--moon-2)}
 footer .inner{display:flex; flex-wrap:wrap; gap:16px 32px; justify-content:space-between; align-items:center; color:var(--mute); font-size:13px}
@@ -362,6 +361,7 @@ footer .logo{width:110px; color:var(--mute)}
         <video id="vidA" class="on" muted playsinline preload="auto" aria-hidden="true"></video>
         <video id="vidB1" muted playsinline preload="auto" aria-hidden="true"></video>
         <video id="vidB2" muted playsinline preload="auto" aria-hidden="true"></video>
+        <video id="vidB3" muted playsinline preload="auto" aria-hidden="true"></video>
         <img class="still day" id="dayImg" alt="La torre Aluna terminada, de día">
         <img class="still night" id="nightImg" alt="La torre Aluna de noche bajo la Vía Láctea">
       </div>
@@ -404,9 +404,9 @@ footer .logo{width:110px; color:var(--mute)}
         <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
       </div>
       <div class="gallery">
-        <figure class="g-pista rv"><img src="media-r2/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
-        <figure class="g-cenital rv"><img src="media-r2/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
-        <figure class="g-noche rv"><img src="media-r2/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <figure class="g-pista rv"><img src="media-r3/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r3/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r3/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
         <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
       </div>
     </div>
@@ -439,10 +439,10 @@ footer .logo{width:110px; color:var(--mute)}
         <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
       </div>
       <div class="duo">
-        <figure class="a rv"><img src="media-r2/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
-        <figure class="b rv"><img src="media-r2/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+        <figure class="a rv"><img src="media-r3/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r3/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
       </div>
-      <div class="exterior rv"><img src="media-r2/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+      <div class="exterior rv"><img src="media-r3/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
     </div>
   </section>
 
@@ -450,19 +450,19 @@ footer .logo{width:110px; color:var(--mute)}
     <div class="inner grid">
       <div class="rv">
         <span class="eyebrow label">Preventa</span>
-        <h2>Agenda una visita privada a Mayto.</h2>
-        <p class="price">Desde $18,810,000 MXN<small>Residencias de 209 m². El precio varía según el nivel; el penthouse tiene precio especial. Lista por unidad a solicitud. Quedan 9 de 10 residencias.</small></p>
+        <h2>Agenda una visita a Mayto y adquiere tu residencia.</h2>
+        <p class="price"><span class="from label">Desde</span>$16,810,000 MXN<small>Residencia de 209 m² frente al mar. Quedan 9 de 10 residencias.</small></p>
+      </div>
+      <div class="rv">
+        <span class="eyebrow label">Comercializa Ratito Properties</span>
         <div class="reach">
           <div class="line"><span class="label">WhatsApp</span><span class="v" id="tel">+52 33 4638 0903</span><button class="copy" data-copy="tel" type="button">Copiar</button></div>
           <div class="line"><span class="label">Correo</span><span class="v" id="mail">properties@ratito.mx</span><button class="copy" data-copy="mail" type="button">Copiar</button></div>
         </div>
-        <a class="btn" href="https://wa.me/523346380903?text=Hola%2C%20me%20interesa%20Aluna%20Residences%20en%20Mayto" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-      </div>
-      <div class="plans rv" aria-label="Formas de pago">
-        <div class="plan-p"><b>Plan estándar</b><em>30 / 70</em><span>30 % de enganche y el 70 % restante en 24 mensualidades sin intereses.</span></div>
-        <div class="plan-p"><b>Plan 50 %</b><em>5 % desc.</em><span>50 % inicial y el saldo en 24 mensualidades sin intereses.</span></div>
-        <div class="plan-p"><b>Contado</b><em>10 % desc.</em><span>Descuento sobre el precio de lista.</span></div>
-        <div class="plan-p"><b>Respaldo legal</b><em>Escriturable</em><span>Escritura pública, régimen condominal, Manifestación de Impacto Ambiental, licencia de construcción y aeródromo autorizado.</span></div>
+        <div class="ctas">
+          <a class="btn" href="https://wa.me/523346380903?text=Hola%2C%20quiero%20agendar%20una%20consulta%20sobre%20Aluna%20Residences" target="_blank" rel="noopener">Agenda una consulta</a>
+          <a class="btn ghost" href="https://wa.me/523346380903?text=Hola%2C%20quiero%20agendar%20una%20visita%20a%20Mayto%20para%20conocer%20Aluna%20Residences" target="_blank" rel="noopener">Agenda una visita a Mayto</a>
+        </div>
       </div>
     </div>
   </section>
@@ -522,19 +522,19 @@ footer .logo{width:110px; color:var(--mute)}
 
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  const M = PHONE ? 'media-r2/v/' : 'media-r2/hd/';
+  const M = PHONE ? 'media-r3/v/' : 'media-r3/hd/';
   const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
   const GEO = PHONE ? {
-    tower:{x0:.188, x1:.817},
+    tower:{x0:.325, x1:.694},
     hole:[{t:0, x:.48, y:.72, s:1, o:1}, {t:1, x:.49, y:.71, s:1.08, o:1}, {t:1.6, x:.50, y:.70, s:1.3, o:.9}, {t:2.2, x:.50, y:.69, s:1.8, o:.4}, {t:2.6, x:.50, y:.68, s:2.4, o:0}],
     logoW:.62, site:{x:.69, y:.55},
-    y:{n6:[.240,.319], n5:[.319,.381], n4:[.381,.442], n3:[.442,.502], n2:[.502,.561], n1:[.561,.621], pb:[.621,.693]}
+    y:{n6:[.276,.331], n5:[.331,.375], n4:[.375,.419], n3:[.419,.464], n2:[.464,.505], n1:[.505,.547], pb:[.547,.594]}
   } : {
-    tower:{x0:.338, x1:.662},
+    tower:{x0:.417, x1:.591},
     hole:[{t:0, x:.490, y:.790, s:1, o:1}, {t:1, x:.500, y:.785, s:1.08, o:1}, {t:1.5, x:.510, y:.780, s:1.2, o:1}, {t:2, x:.530, y:.770, s:1.45, o:.85}, {t:2.5, x:.560, y:.760, s:2, o:.4}, {t:2.9, x:.590, y:.760, s:2.8, o:0}],
     logoW:.25, site:{x:.618, y:.601},
-    y:{n6:[.071,.205], n5:[.205,.306], n4:[.306,.410], n3:[.410,.513], n2:[.513,.616], n1:[.616,.718], pb:[.718,.846]}
+    y:{n6:[.120,.190], n5:[.190,.255], n4:[.255,.324], n3:[.324,.389], n2:[.389,.454], n1:[.454,.519], pb:[.519,.593]}
   };
   const TOWER_BOX = GEO.tower;
 
@@ -554,30 +554,33 @@ footer .logo{width:110px; color:var(--mute)}
   const TYPICAL_LEDE = 'Dos residencias de 209 m² por nivel, abiertas al perímetro: estancia, comedor y cocina hacia el mar, dos recámaras con baño propio y balcones alrededor de la envolvente curva.';
   LEVELS.forEach(l => { l.y = GEO.y[l.id]; if (!l.units){ l.units = [{k:'res', zone:[.169,.5], tag:'A'}, {k:'res', zone:[.5,.831], tag:'B'}]; l.lede = TYPICAL_LEDE; } });
   const KINDS = {
-    res:  {name:'Residencia', area:'209 m²', a:'2 recámaras', b:'2 baños', price:'Desde $18,810,000 MXN', tour:'tipo', kind:'Residencia tipo'},
+    res:  {name:'Residencia', area:'209 m²', a:'2 recámaras', b:'2 baños', price:'Desde $16,810,000 MXN', tour:'tipo', kind:'Residencia tipo'},
     ph:   {name:'Penthouse', area:'426.31 m²', a:'4 recámaras', b:'4.5 baños', price:'Precio especial a solicitud', tour:'ph', kind:'Una sola unidad'},
     pb:   {name:'Lobby y restaurante', area:'445.19 m²', a:'Área común', b:'Alberca frente al mar', price:'', tour:'pb', kind:'Área común'},
     roof: {name:'Rooftop', area:'Área común', a:'Gimnasio', b:'Jacuzzi', price:'', tour:'roof', kind:'Área común'}
   };
   // Each tour is a chain of clips; clip i starts where clip i-1 ends, so together they play as one walk.
   const TOURS = {
-    tipo: {img:'maqueta-tipo', stops:[{t:'Cocina y comedor', v:'tipo-1'}, {t:'Estancia', v:'tipo-2'}, {t:'Recámara principal', v:'tipo-3'}, {t:'Baño principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
-    ph:   {img:'maqueta-ph',   stops:[{t:'Estancia frente al mar', v:'ph-1'}, {t:'Cocina y comedor', v:'ph-2'}, {t:'Suite principal', v:'ph-3'}]},
-    pb:   {img:'maqueta-pb',   stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
-    roof: {img:'maqueta-n6',   stops:[{t:'Jacuzzi al atardecer', tn:'Jacuzzi bajo las estrellas', v:'rooftop-1'}, {t:'Gimnasio', v:'rooftop-2'}, {t:'Cocina y mesa para eventos', v:'rooftop-3'}]}
+    tipo: {img:'maqueta-tipo', night:false, stops:[{t:'Llegada · elevadores', v:'tipo-1'}, {t:'Cocina y comedor', v:'tipo-2'}, {t:'Estancia', v:'tipo-3'}, {t:'Recámara principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
+    ph:   {img:'maqueta-ph',   night:false, stops:[{t:'Llegada · elevadores', v:'ph-1'}, {t:'Estancia frente al mar', v:'ph-2'}, {t:'Cocina y comedor', v:'ph-3'}, {t:'Suite principal', v:'ph-4'}]},
+    pb:   {img:'maqueta-pb',   night:false, stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
+    roof: {img:'maqueta-n6',   night:false, stops:[{t:'Jacuzzi al atardecer', tn:'Jacuzzi bajo las estrellas', v:'rooftop-1'}, {t:'Terraza y comedor', v:'rooftop-2'}, {t:'Gimnasio', v:'rooftop-3'}]}
   };
+  if (PHONE) TOURS.ph.stops = TOURS.ph.stops.slice(0, 3);   // TEMP until the phone suite clip (ph-4) is rendered
 
   // ---------- the arrival timeline: scroll lengths in viewport heights ----------
-  // A: the dive, landing on the empty lot. B1 + B2: the descent around the lot while the tower is built, ending on the finished tower.
-  const FILMS = {A:'vuelo.mp4', B1:'obra-1.mp4', B2:'obra-2.mp4'};
-  const A_LAND = 7.96, END = 7.0;
+  // A: the dive, landing on the empty lot. Then the build, seen from three sides: B1 the walkway and the back of the tower,
+  // B2 the side, B3 the front, finished, ending over the ocean on the explorer frame.
+  const FILMS = {A:'vuelo.mp4', B1:'obra-1.mp4', B2:'obra-2.mp4', B3:'obra-3.mp4'};
+  const BUILD = ['B1', 'B2', 'B3'];
+  const A_LAND = 7.96, END = 7.9;
   const SEG = [
     {len:2.6, v:'A',  t:[0, A_LAND]},
     {len:0.8, v:'A',  t:[A_LAND, A_LAND], chap:'terreno', pin:true},
-    {len:2.3, v:'B1', t:[0, END], chap:'estructura'},
-    {len:0.8, v:'B2', t:[0, 2.4], chap:'estructura'},
-    {len:1.5, v:'B2', t:[2.4, END], chap:'acabados'},
-    {len:1.3, v:'B2', t:[END, END], explore:true}
+    {len:2.0, v:'B1', t:[0, END], chap:'estructura'},
+    {len:1.8, v:'B2', t:[0, END], chap:'estructura'},
+    {len:2.0, v:'B3', t:[0, END], chap:'acabados'},
+    {len:1.3, v:'B3', t:[END, END], explore:true}
   ];
   const TOTAL = SEG.reduce((s, x) => s + x.len, 0);
   const sec = $('llegada'), stage = $('stage'), media = $('media');
@@ -606,7 +609,7 @@ footer .logo{width:110px; color:var(--mute)}
   }
 
   // ---------- logo ----------
-  const logoReady = fetch('media-r2/aluna-logo.svg').then(r => r.text()).then(svg => {
+  const logoReady = fetch('media-r3/aluna-logo.svg').then(r => r.text()).then(svg => {
     svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
              .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
     document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
@@ -629,10 +632,10 @@ footer .logo{width:110px; color:var(--mute)}
     } else blob = await res.blob();
     const u = URL.createObjectURL(blob); blobCache.set(url, u); return u;
   }
-  const vids = {A:$('vidA'), B1:$('vidB1'), B2:$('vidB2')};
-  const ready = {A:false, B1:false, B2:false}, seeking = {A:false, B1:false, B2:false};
+  const vids = {A:$('vidA'), B1:$('vidB1'), B2:$('vidB2'), B3:$('vidB3')};
+  const ready = {A:false, B1:false, B2:false, B3:false}, seeking = {A:false, B1:false, B2:false, B3:false};
   Object.keys(vids).forEach(k => vids[k].addEventListener('seeked', () => { seeking[k] = false; }));
-  const got = {B1:0, B2:0}, failed = {B1:false, B2:false};
+  const got = {B1:0, B2:0, B3:0}, failed = {B1:false, B2:false, B3:false};
   function attach(k, url){
     return new Promise(ok => { const v = vids[k];
       v.addEventListener('loadeddata', () => { ready[k] = true; dirty = true; release(k); ok(); }, {once:true});
@@ -644,7 +647,7 @@ footer .logo{width:110px; color:var(--mute)}
     try { await attach('A', await fetchBlob(M + FILMS.A, p => setProg(Math.min(.98, p)))); } catch (e) {}
     setProg(1);
     setTimeout(() => $('loader').classList.add('done'), 300);
-    for (const k of ['B1', 'B2']){
+    for (const k of BUILD){
       try { await attach(k, await fetchBlob(M + FILMS[k], p => { got[k] = p; if (held === k) showWait(); })); }
       catch (e) { failed[k] = true; release(k); } }
     // the explorer stills come last
@@ -664,7 +667,7 @@ footer .logo{width:110px; color:var(--mute)}
   function gateY(k){ let u = 0; for (const s of SEG){ if (s.v === k) break; u += s.len; }
     return sec.offsetTop + (sec.offsetHeight - innerHeight) * u / TOTAL - 1; }
   function showWait(){
-    const p = held === 'B2' ? .5 + got.B2 / 2 : got.B1 / 2;
+    const p = (BUILD.indexOf(held) + got[held]) / BUILD.length;
     waitTxt.textContent = `Construyendo Aluna · ${Math.round(p * 100)} %`; wait.style.setProperty('--p', p);
   }
   function hold(k){ held = k; showWait(); wait.classList.add('on'); }
@@ -675,7 +678,7 @@ footer .logo{width:110px; color:var(--mute)}
   addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
   addEventListener('touchmove', e => { if (held && e.touches[0].clientY < touchY) e.preventDefault(); }, {passive:false});
   function onScroll(){
-    const due = held || ['B1', 'B2'].find(f => !ready[f] && !failed[f]);
+    const due = held || BUILD.find(f => !ready[f] && !failed[f]);
     if (due){ const g = gateY(due); if (scrollY > g){ scrollTo(0, g); if (!held) hold(due); } }
     const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight;
     prog = span > 0 ? clamp(-r.top / span, 0, 1) : 1;
@@ -726,7 +729,7 @@ footer .logo{width:110px; color:var(--mute)}
 
     // chapter captions and the explorer
     const chap = seg.chap || '';
-    const exploring = !!seg.explore && onFilm === 'B2' && shown.t > END - .25;
+    const exploring = !!seg.explore && onFilm === 'B3' && shown.t > END - .25;
     if (chap !== lastChap){ chaps.forEach(c => c.classList.toggle('on', c.dataset.chap === chap)); lastChap = chap; }
     if (exploring !== lastExplore){ explore.classList.toggle('on', exploring); stage.classList.toggle('exploring', exploring); lastExplore = exploring; }
     scrim.style.setProperty('--scrim', chap || exploring ? .85 : .35);
@@ -806,7 +809,7 @@ footer .logo{width:110px; color:var(--mute)}
   function openLevel(id){
     const l = byId(id); current = l;
     $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
-    const img = $('planImg'); img.src = `media-r2/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const img = $('planImg'); img.src = `media-r3/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
     const svg = $('planSvg'); svg.innerHTML = '';
     const list = $('unitList'); list.innerHTML = '';
     $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
@@ -868,7 +871,9 @@ footer .logo{width:110px; color:var(--mute)}
     const p = document.createElement('button'); p.type = 'button'; p.className = 'play'; p.textContent = 'Recorrido completo';
     p.addEventListener('click', () => { tShown = tTarget = 0; startAuto(T.stops.length); }); stops.appendChild(p);
     tShown = tTarget = 0; swipeHint.classList.add('on');
-    setTourNight(stage.classList.contains('night'), true);
+    const canNight = T.night !== false;      // night:false = no night set matching these clips yet
+    tour.querySelector('.dn-tour').hidden = !canNight;
+    setTourNight(canNight && stage.classList.contains('night'), true);
     openOverlay(tour);
     requestAnimationFrame(tick);
   }
