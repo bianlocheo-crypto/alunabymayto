@@ -5,7 +5,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aluna Residences · Mayto">
 <meta property="og:description" content="Diez residencias frente al mar en la playa virgen de Mayto, Jalisco. Explora la torre piso por piso y recorre cada residencia en 3D.">
-<meta property="og:image" content="https://alunabymayto.vercel.app/og-r1.jpg">
+<meta property="og:image" content="https://alunabymayto.vercel.app/og-r2.jpg">
 <meta property="og:url" content="https://alunabymayto.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -100,6 +100,9 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 .dn{position:absolute; right:var(--gut-r); top:calc(env(safe-area-inset-top,0px) + 92px); display:flex; border:1px solid rgba(255,255,255,.55); background:rgba(9,14,21,.35)}
 .dn button{background:none; border:0; color:#fff; padding:10px 16px; cursor:pointer; font:600 10px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase}
 .dn button[aria-pressed="true"]{background:#fff; color:#0D141D}
+.tright{display:flex; align-items:center; gap:10px}
+.dn.dn-tour{position:static; transform:none}
+@media (max-width:760px){ #tour .ov-top{flex-wrap:wrap; row-gap:12px} #tour .tright{order:-1; width:100%; justify-content:space-between} }
 @media (max-width:760px){ .dn{top:auto; bottom:calc(env(safe-area-inset-bottom,0px) + 22px); right:50%; transform:translateX(50%)} }
 .hint i{width:1px; height:44px; background:linear-gradient(#fff, transparent); animation:drip 2.2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0); transform-origin:top} 45%{transform:scaleY(1); transform-origin:top} 55%{transform:scaleY(1); transform-origin:bottom} 100%{transform:scaleY(0); transform-origin:bottom}}
@@ -394,9 +397,9 @@ footer .logo{width:110px; color:var(--mute)}
         <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
       </div>
       <div class="gallery">
-        <figure class="g-pista rv"><img src="media-r1/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
-        <figure class="g-cenital rv"><img src="media-r1/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
-        <figure class="g-noche rv"><img src="media-r1/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <figure class="g-pista rv"><img src="media-r2/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r2/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r2/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
         <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
       </div>
     </div>
@@ -429,10 +432,10 @@ footer .logo{width:110px; color:var(--mute)}
         <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
       </div>
       <div class="duo">
-        <figure class="a rv"><img src="media-r1/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
-        <figure class="b rv"><img src="media-r1/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+        <figure class="a rv"><img src="media-r2/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r2/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
       </div>
-      <div class="exterior rv"><img src="media-r1/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+      <div class="exterior rv"><img src="media-r2/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
     </div>
   </section>
 
@@ -486,7 +489,8 @@ footer .logo{width:110px; color:var(--mute)}
 <div class="overlay" id="tour" role="dialog" aria-modal="true" aria-labelledby="tTitle">
   <div class="ov-top">
     <div class="crumb"><span class="label" id="tEyebrow">Recorrido 3D</span><b id="tTitle">Residencia</b></div>
-    <button class="x" type="button" data-close="tour">Volver al plano</button>
+    <div class="tright"><div class="dn dn-tour" role="group" aria-label="Recorrido de día o de noche"><button type="button" data-tdn="day" aria-pressed="true">Día</button><button type="button" data-tdn="night" aria-pressed="false">Noche</button></div>
+    <button class="x" type="button" data-close="tour">Volver al plano</button></div>
   </div>
   <div class="ov-body">
     <div class="screen" id="screen">
@@ -511,7 +515,7 @@ footer .logo{width:110px; color:var(--mute)}
 
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  const M = PHONE ? 'media-r1/v/' : 'media-r1/hd/';
+  const M = PHONE ? 'media-r2/v/' : 'media-r2/hd/';
   const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
   const GEO = PHONE ? {
@@ -553,7 +557,7 @@ footer .logo{width:110px; color:var(--mute)}
     tipo: {img:'maqueta-tipo', stops:[{t:'Cocina y comedor', v:'tipo-1'}, {t:'Estancia', v:'tipo-2'}, {t:'Recámara principal', v:'tipo-3'}, {t:'Baño principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
     ph:   {img:'maqueta-ph',   stops:[{t:'Estancia frente al mar', v:'ph-1'}, {t:'Cocina y comedor', v:'ph-2'}, {t:'Suite principal', v:'ph-3'}]},
     pb:   {img:'maqueta-pb',   stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
-    roof: {img:'maqueta-n6',   stops:[{t:'Jacuzzi al atardecer', v:'rooftop-1'}, {t:'Gimnasio', v:'rooftop-2'}, {t:'Cocina y mesa para eventos', v:'rooftop-3'}]}
+    roof: {img:'maqueta-n6',   stops:[{t:'Jacuzzi al atardecer', tn:'Jacuzzi bajo las estrellas', v:'rooftop-1'}, {t:'Gimnasio', v:'rooftop-2'}, {t:'Cocina y mesa para eventos', v:'rooftop-3'}]}
   };
 
   // ---------- the arrival timeline: scroll lengths in viewport heights ----------
@@ -595,7 +599,7 @@ footer .logo{width:110px; color:var(--mute)}
   }
 
   // ---------- logo ----------
-  const logoReady = fetch('media-r1/aluna-logo.svg').then(r => r.text()).then(svg => {
+  const logoReady = fetch('media-r2/aluna-logo.svg').then(r => r.text()).then(svg => {
     svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
              .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
     document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
@@ -774,7 +778,7 @@ footer .logo{width:110px; color:var(--mute)}
   function openLevel(id){
     const l = byId(id); current = l;
     $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
-    const img = $('planImg'); img.src = `media-r1/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const img = $('planImg'); img.src = `media-r2/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
     const svg = $('planSvg'); svg.innerHTML = '';
     const list = $('unitList'); list.innerHTML = '';
     $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
@@ -812,7 +816,7 @@ footer .logo{width:110px; color:var(--mute)}
   // stops where the finger stops; a quick flick glides to the next room in that direction.
   const screen = $('screen'), tm = $('tm'), track = $('track'), trackFill = $('trackFill'), tLoad = $('tLoad'), swipeHint = $('swipeHint');
   const CLIP = 5.0;                          // usable length of each clip (they are 5.04 s)
-  let T = null, TV = [], tLoaded = [], tSeek = [], tShown = 0, tTarget = 0, tOn = -1, mode = 'idle', chainTo = 0, tToken = 0, tKey = '';
+  let T = null, TV = [], tLoaded = [], tSeek = [], tShown = 0, tTarget = 0, tOn = -1, mode = 'idle', chainTo = 0, tToken = 0, tKey = '', tNight = false;
   let drag = null, wheelIdle = 0;
   const keypoints = () => Array.from({length:T.stops.length + 1}, (_, i) => i * CLIP);
   const tTotal = () => T.stops.length * CLIP;
@@ -836,20 +840,36 @@ footer .logo{width:110px; color:var(--mute)}
     const p = document.createElement('button'); p.type = 'button'; p.className = 'play'; p.textContent = 'Recorrido completo';
     p.addEventListener('click', () => { tShown = tTarget = 0; startAuto(T.stops.length); }); stops.appendChild(p);
     tShown = tTarget = 0; swipeHint.classList.add('on');
+    setTourNight(stage.classList.contains('night'), true);
     openOverlay(tour);
-    // load the clips one after another so the first room is ready as soon as possible
+    requestAnimationFrame(tick);
+  }
+  // Day and night are two sets of the same clips (night files end in -n); switching keeps the camera where it is.
+  const stopName = s => tNight && s.tn || s.t;   // a few rooms are named for the time of day
+  function setTourNight(night, first){
+    tNight = night;
+    $('stops').querySelectorAll('button:not(.play)').forEach((b, x) => { if (x) b.textContent = stopName(T.stops[x - 1]); });
+    document.querySelectorAll('[data-tdn]').forEach(b => b.setAttribute('aria-pressed', (b.dataset.tdn === 'night') === night));
+    const here = Math.min(T.stops.length - 1, Math.floor(tShown / CLIP));
+    if (mode === 'auto'){ TV.forEach(v => v.pause()); mode = 'idle'; }
+    tLoaded = TV.map(() => false);
     const token = ++tToken;
+    const order = [...Array(TV.length).keys()].sort((a, b) => (a < here) - (b < here) || a - b);   // the clip on screen first, then onward
     (async () => {
-      for (let j = 0; j < TV.length; j++){
-        tLoad.textContent = `Cargando recorrido ${Math.round(j / TV.length * 100)} %`; tLoad.hidden = false;
-        try { const url = await fetchBlob(M + T.stops[j].v + '.mp4'); if (token !== tToken) return; TV[j].src = url; TV[j].load();
+      for (let n = 0; n < order.length; n++){
+        const j = order[n];
+        tLoad.textContent = `${night ? 'Noche' : 'Día'} · cargando ${Math.round(n / order.length * 100)} %`; tLoad.hidden = false;
+        try { const url = await fetchBlob(M + T.stops[j].v + (night ? '-n' : '') + '.mp4'); if (token !== tToken) return;
+              TV[j].src = url; TV[j].load();
               await new Promise(r => { TV[j].addEventListener('loadeddata', r, {once:true}); TV[j].addEventListener('error', r, {once:true}); });
-              tLoaded[j] = true; if (j === 0) startAuto(1); } catch (e) {}
+              if (token !== tToken) return;
+              tLoaded[j] = true; tSeek[j] = false;
+              if (first && j === 0) startAuto(1); } catch (e) {}
       }
       if (token === tToken) tLoad.hidden = true;
     })();
-    requestAnimationFrame(tick);
   }
+  document.querySelectorAll('[data-tdn]').forEach(b => b.addEventListener('click', () => { if (T) setTourNight(b.dataset.tdn === 'night', false); }));
   // auto mode plays the clips natively (smoothest on phones) up to keypoint `to`
   function startAuto(to){ chainTo = to; mode = 'auto'; const j = Math.min(T.stops.length - 1, Math.floor(tShown / CLIP + 1e-3)); playClip(j, tShown - j * CLIP); }
   function playClip(j, at){ if (!tLoaded[j]) return; showClip(j); const v = TV[j]; try { v.currentTime = Math.max(0, at); } catch (e) {} v.play().catch(() => {}); }
@@ -877,7 +897,7 @@ footer .logo{width:110px; color:var(--mute)}
     // caption: the nearest keypoint
     const kp = Math.round(tShown / CLIP);
     $('tStopNo').textContent = kp === 0 ? 'Vista general' : `Parada ${kp} de ${n}`;
-    $('tStop').textContent = kp === 0 ? 'Maqueta 3D' : T.stops[kp - 1].t;
+    $('tStop').textContent = kp === 0 ? 'Maqueta 3D' : stopName(T.stops[kp - 1]);
     $('stops').querySelectorAll('button:not(.play)').forEach((b, x) => b.setAttribute('aria-current', x === kp));
     trackFill.style.transform = `scaleX(${tShown / total})`;
   }
