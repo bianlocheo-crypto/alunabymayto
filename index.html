@@ -104,6 +104,11 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 .dn.dn-tour{position:static; transform:none}
 @media (max-width:760px){ #tour .ov-top{flex-wrap:wrap; row-gap:12px} #tour .tright{order:-1; width:100%; justify-content:space-between} }
 @media (max-width:760px){ .dn{top:auto; bottom:calc(env(safe-area-inset-bottom,0px) + 22px); right:50%; transform:translateX(50%)} }
+.wait{position:absolute; z-index:4; left:0; right:0; top:calc(env(safe-area-inset-top,0px) + 128px); display:grid; justify-items:center; gap:12px; opacity:0; transition:opacity .3s; pointer-events:none}
+.wait.on{opacity:1}
+.wait .label{color:#fff; text-shadow:0 1px 12px rgba(20,40,60,.45)}
+.wait i{position:relative; width:160px; height:1px; background:rgba(255,255,255,.3); overflow:hidden}
+.wait i b{position:absolute; inset:0; background:#fff; transform-origin:left; transform:scaleX(var(--p,0)); transition:transform .3s}
 .hint i{width:1px; height:44px; background:linear-gradient(#fff, transparent); animation:drip 2.2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(0); transform-origin:top} 45%{transform:scaleY(1); transform-origin:top} 55%{transform:scaleY(1); transform-origin:bottom} 100%{transform:scaleY(0); transform-origin:bottom}}
 
@@ -363,6 +368,7 @@ footer .logo{width:110px; color:var(--mute)}
       <div class="hole" id="hole" aria-hidden="true"><div class="logo" data-logo></div></div>
       <div class="intro" id="intro"><span class="label">Cabo Corrientes · Costalegre · Jalisco</span></div>
       <div class="hint" id="hint"><span class="label">Desliza para descender</span><i></i></div>
+      <div class="wait" id="wait" aria-live="polite"><span class="label" id="waitTxt">Construyendo Aluna</span><i><b></b></i></div>
       <div class="pin" id="pin" aria-hidden="true">
         <div class="dot"></div><div class="stem"></div>
         <div class="card"><span class="label">El terreno</span><b>Aquí nacerá Aluna</b><span class="s">Templo de Cáncer · 7 niveles · 10 residencias</span></div>
@@ -625,10 +631,11 @@ footer .logo{width:110px; color:var(--mute)}
   const vids = {A:$('vidA'), B1:$('vidB1'), B2:$('vidB2')};
   const ready = {A:false, B1:false, B2:false}, seeking = {A:false, B1:false, B2:false};
   Object.keys(vids).forEach(k => vids[k].addEventListener('seeked', () => { seeking[k] = false; }));
+  const got = {B1:0, B2:0}, failed = {B1:false, B2:false};
   function attach(k, url){
     return new Promise(ok => { const v = vids[k];
-      v.addEventListener('loadeddata', () => { ready[k] = true; dirty = true; ok(); }, {once:true});
-      v.addEventListener('error', () => ok(), {once:true});
+      v.addEventListener('loadeddata', () => { ready[k] = true; dirty = true; release(k); ok(); }, {once:true});
+      v.addEventListener('error', () => { failed[k] = true; release(k); ok(); }, {once:true});
       v.src = url; v.load(); });
   }
   async function boot(){
@@ -636,7 +643,9 @@ footer .logo{width:110px; color:var(--mute)}
     try { await attach('A', await fetchBlob(M + FILMS.A, p => setProg(Math.min(.98, p)))); } catch (e) {}
     setProg(1);
     setTimeout(() => $('loader').classList.add('done'), 300);
-    for (const k of ['B1', 'B2']){ try { await attach(k, await fetchBlob(M + FILMS[k])); } catch (e) {} }
+    for (const k of ['B1', 'B2']){
+      try { await attach(k, await fetchBlob(M + FILMS[k], p => { got[k] = p; if (held === k) showWait(); })); }
+      catch (e) { failed[k] = true; release(k); } }
     // the explorer stills come last
     $('dayImg').src = M + 'torre-dia.jpg'; $('nightImg').src = M + 'torre-noche.jpg';
   }
@@ -648,7 +657,25 @@ footer .logo{width:110px; color:var(--mute)}
     for (const s of SEG){ if (u <= s.len) return {seg:s, k:s.len ? u / s.len : 1}; u -= s.len; }
     return {seg:SEG[SEG.length - 1], k:1};
   }
+  // a construction film that hasn't arrived yet holds the scroll on its first frame, so the build is never skipped
+  const wait = $('wait'), waitTxt = $('waitTxt');
+  let held = null;
+  function gateY(k){ let u = 0; for (const s of SEG){ if (s.v === k) break; u += s.len; }
+    return sec.offsetTop + (sec.offsetHeight - innerHeight) * u / TOTAL - 1; }
+  function showWait(){
+    const p = held === 'B2' ? .5 + got.B2 / 2 : got.B1 / 2;
+    waitTxt.textContent = `Construyendo Aluna · ${Math.round(p * 100)} %`; wait.style.setProperty('--p', p);
+  }
+  function hold(k){ held = k; showWait(); wait.classList.add('on'); }
+  function release(k){ if (held !== k) return; held = null; wait.classList.remove('on'); }
+  // while held, downward gestures are swallowed (overflow:hidden on the page would unpin the stage)
+  let touchY = 0;
+  addEventListener('wheel', e => { if (held && e.deltaY > 0) e.preventDefault(); }, {passive:false});
+  addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
+  addEventListener('touchmove', e => { if (held && e.touches[0].clientY < touchY) e.preventDefault(); }, {passive:false});
   function onScroll(){
+    const due = held || ['B1', 'B2'].find(f => !ready[f] && !failed[f]);
+    if (due){ const g = gateY(due); if (scrollY > g){ scrollTo(0, g); if (!held) hold(due); } }
     const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight;
     prog = span > 0 ? clamp(-r.top / span, 0, 1) : 1;
     const {seg, k} = locate(prog);
@@ -698,7 +725,7 @@ footer .logo{width:110px; color:var(--mute)}
 
     // chapter captions and the explorer
     const chap = seg.chap || '';
-    const exploring = !!seg.explore && shown.v === 'B2' && shown.t > END - .25;
+    const exploring = !!seg.explore && onFilm === 'B2' && shown.t > END - .25;
     if (chap !== lastChap){ chaps.forEach(c => c.classList.toggle('on', c.dataset.chap === chap)); lastChap = chap; }
     if (exploring !== lastExplore){ explore.classList.toggle('on', exploring); stage.classList.toggle('exploring', exploring); lastExplore = exploring; }
     scrim.style.setProperty('--scrim', chap || exploring ? .85 : .35);
