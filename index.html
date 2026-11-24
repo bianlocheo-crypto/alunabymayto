@@ -135,7 +135,8 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 .explore{position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0; transition:opacity .6s;
   background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.25) 22%, rgba(10,18,28,0) 34%)}
 .explore.on{opacity:1}
-.explore.on .floors, .explore.on .index{pointer-events:auto}
+.explore.on .floors, .explore.on .index, .explore.on .dn{pointer-events:auto}
+.explore .dn{z-index:2}   /* above the full-screen floor hit areas */
 .floors{position:absolute; left:0; top:0; overflow:visible}
 .floors .lvl{fill:rgba(205,170,99,0); stroke:rgba(255,255,255,0); stroke-width:1.5; vector-effect:non-scaling-stroke; cursor:pointer; transition:fill .25s, stroke .25s}
 .floors .lvl:hover,.floors .lvl.hot,.floors .lvl:focus-visible{fill:rgba(205,170,99,.32); stroke:rgba(255,255,255,.95); outline:none}
