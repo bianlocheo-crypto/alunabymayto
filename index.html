@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="es">
+<meta name="description" content="Aluna Residences · Mayto. Diez residencias frente al mar en la playa virgen de Mayto, Cabo Corrientes, Jalisco: una torre de siete niveles, nueve residencias de 209 m² y un penthouse de 426 m².">
+<meta name="theme-color" content="#0D141D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aluna Residences · Mayto">
+<meta property="og:description" content="Diez residencias frente al mar en la playa virgen de Mayto, Jalisco. Explora la torre piso por piso y recorre cada residencia en 3D.">
+<meta property="og:image" content="https://alunabymayto.vercel.app/og-r1.jpg">
+<meta property="og:url" content="https://alunabymayto.vercel.app">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>html,body{margin:0}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aluna Residences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Montserrat:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600&display=swap">
+<style>
+/* Layout: one pinned stage carries the whole arrival (sky → clouds → coast → empty lot → construction → finished tower),
+   and the finished tower becomes the explorer. Below it, lunar-white editorial pages and one night page. */
+:root{
+  --moon:#ECEDEA;        /* page ground: cool lunar white, not cream */
+  --moon-2:#E2E4E0;      /* second surface */
+  --ink:#2B2F33;         /* text: the logo's charcoal, deepened */
+  --mute:#676C70;        /* secondary text: logo grey */
+  --line:#C9CCC8;
+  --gold:#9C7A3A;        /* brochure gold rule, darkened to read on white */
+  --night:#0D141D;       /* night surfaces, same in both themes */
+  --night-2:#141D28;
+  --night-ink:#E8E5DC;
+  --night-mute:#9AA4AE;
+  --night-gold:#CDAA63;
+  --on-photo:#F7F6F2;
+  --f-display:"Gilda Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --f-label:"Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Nunito Sans", "Helvetica Neue", Arial, sans-serif;
+  --gut:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --moon:#11161C; --moon-2:#171D24; --ink:#E6E4DE; --mute:#9CA2A7; --line:#2B323A; --gold:#CDAA63; color-scheme:dark;
+}}
+:root[data-theme="dark"]{ --moon:#11161C; --moon-2:#171D24; --ink:#E6E4DE; --mute:#9CA2A7; --line:#2B323A; --gold:#CDAA63; color-scheme:dark; }
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+body{background:var(--moon); color:var(--ink); font:300 17px/1.65 var(--f-body); -webkit-font-smoothing:antialiased; overflow-x:hidden}
+body.locked{overflow:hidden}
+img{max-width:100%; display:block}
+h1,h2,h3{font-family:var(--f-display); font-weight:400; text-wrap:balance; margin:0; line-height:1.08; letter-spacing:.005em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit; color:inherit}
+.label{font:600 11px/1.3 var(--f-label); letter-spacing:.28em; text-transform:uppercase}
+.wrap{padding-left:var(--gut); padding-right:var(--gut-r)}
+.inner{max-width:1240px; margin:0 auto}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+.logo svg{display:block; width:100%; height:auto}
+
+/* ---------- loader ---------- */
+#loader{position:fixed; inset:0; z-index:60; background:#ECEDEA; color:#5E6266; display:grid; place-items:center; transition:opacity .9s ease, visibility .9s}
+#loader.done{opacity:0; visibility:hidden}
+.ld{width:min(320px,64vw); display:grid; gap:22px; justify-items:center}
+.ld .logo{width:100%; position:relative}
+.ld .logo .fill{position:absolute; inset:0; color:#2B2F33; clip-path:inset(0 100% 0 0); transition:clip-path .35s linear}
+.ld .logo .base{opacity:.22}
+.ld .where{font:600 10px/1 var(--f-label); letter-spacing:.34em; text-transform:uppercase; color:#7A7E81}
+
+/* ---------- header ---------- */
+header{position:fixed; top:0; left:0; right:0; z-index:30; color:var(--on-photo);
+  padding:calc(env(safe-area-inset-top,0px) + 18px) var(--gut-r) 18px var(--gut); transition:background .4s, color .4s, padding .4s}
+header .row{max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:24px}
+header .logo{width:96px}
+header nav{display:flex; gap:28px; align-items:center}
+header nav a{font:600 10.5px/1 var(--f-label); letter-spacing:.24em; text-transform:uppercase; text-decoration:none; opacity:.85}
+header nav a:hover{opacity:1}
+header .cta{border:1px solid currentColor; padding:11px 16px; opacity:1}
+header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:var(--ink); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); padding-top:calc(env(safe-area-inset-top,0px) + 12px); padding-bottom:12px; border-bottom:1px solid var(--line)}
+@media (max-width:760px){ header nav a:not(.cta){display:none} header .logo{width:84px} }
+
+/* ---------- the arrival stage ---------- */
+#llegada{position:relative; background:#cfdbe6}
+.stage{position:sticky; top:0; height:100vh; height:100svh; overflow:hidden; color:var(--on-photo);
+  background:linear-gradient(180deg, #97bce5 0%, #97bce5 50%, #f4c897 50%, #f4c897 100%)}
+.media{position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform}
+.media video,.media img.still{position:absolute; inset:0; width:100%; height:100%; display:block}
+.media video{opacity:0} .media video.on{opacity:1}
+.scrim{position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(180deg, rgba(10,20,30,.42) 0%, rgba(10,20,30,.12) 12%, rgba(10,20,30,0) 24%, rgba(10,20,30,0) 55%, rgba(8,14,20,.6) 100%);
+  opacity:var(--scrim,.35); transition:opacity .3s}
+.hole{position:absolute; left:0; top:0; z-index:3; color:#F4F3EF; transform-origin:50% 50%; will-change:transform,opacity; pointer-events:none; filter:drop-shadow(0 2px 18px rgba(30,50,70,.35))}
+.intro{position:absolute; z-index:4; left:var(--gut); right:var(--gut-r); top:calc(env(safe-area-inset-top,0px) + 96px); display:flex; justify-content:center; text-align:center; transition:opacity .4s}
+.intro .label,.hint .label{color:#fff; text-shadow:0 1px 12px rgba(20,40,60,.45)}
+.hint{position:absolute; z-index:4; left:0; right:0; top:calc(env(safe-area-inset-top,0px) + 128px); display:grid; justify-items:center; gap:12px; transition:opacity .4s}
+@media (max-width:760px){ .hint{top:calc(env(safe-area-inset-top,0px) + 132px)} }
+.media .still.day,.media .still.night{opacity:0; transition:opacity .9s ease}
+.stage.exploring .media .still.day{opacity:1}
+.stage.exploring.night .media .still.night{opacity:1}
+.dn{position:absolute; right:var(--gut-r); top:calc(env(safe-area-inset-top,0px) + 92px); display:flex; border:1px solid rgba(255,255,255,.55); background:rgba(9,14,21,.35)}
+.dn button{background:none; border:0; color:#fff; padding:10px 16px; cursor:pointer; font:600 10px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase}
+.dn button[aria-pressed="true"]{background:#fff; color:#0D141D}
+@media (max-width:760px){ .dn{top:auto; bottom:calc(env(safe-area-inset-bottom,0px) + 22px); right:50%; transform:translateX(50%)} }
+.hint i{width:1px; height:44px; background:linear-gradient(#fff, transparent); animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0); transform-origin:top} 45%{transform:scaleY(1); transform-origin:top} 55%{transform:scaleY(1); transform-origin:bottom} 100%{transform:scaleY(0); transform-origin:bottom}}
+
+.pin{position:absolute; z-index:4; left:0; top:0; opacity:0; transition:opacity .5s; pointer-events:none}
+.pin .dot{position:absolute; width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:#fff; box-shadow:0 0 0 6px rgba(255,255,255,.25)}
+.pin .stem{position:absolute; left:0; bottom:10px; width:1px; height:var(--stem,90px); background:rgba(255,255,255,.85); transform-origin:bottom; transform:scaleY(var(--grow,0)); transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.card{background:rgba(13,20,29,.84); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); padding:14px 18px 15px; border-left:1px solid var(--night-gold); color:#C9CFD5}
+.card .label{color:var(--night-gold); font-size:9.5px}
+.card b{display:block; font:400 22px/1.1 var(--f-display); color:#fff; margin:6px 0 6px}
+.card span.s{font:400 13px/1.45 var(--f-body)}
+.pin .card{position:absolute; bottom:calc(var(--stem,90px) + 14px); left:-1px; width:max-content; max-width:min(300px, 70vw)}
+.pin.on{opacity:1} .pin.on .stem{--grow:1}
+
+.chapter{position:absolute; z-index:4; left:var(--gut); right:var(--gut-r); bottom:calc(env(safe-area-inset-bottom,0px) + 40px); pointer-events:none}
+.chapter .inner{position:relative; min-height:150px}
+.chap{position:absolute; left:0; bottom:0; display:grid; gap:12px; max-width:min(430px, 100%); opacity:0; transform:translateY(14px); transition:opacity .6s, transform .6s}
+@media (min-width:761px){ .chap{max-width:min(430px, 27vw)} }
+.chap.on{opacity:1; transform:none}
+.chap h2{font-size:clamp(26px, 3.2vw, 46px); color:#fff; text-shadow:0 2px 24px rgba(5,12,20,.4)}
+.chap p{color:#EDEAE2; max-width:44ch; text-shadow:0 1px 14px rgba(5,12,20,.5)}
+.chap .label{color:#EBDDB9}
+
+/* explorer layer (lives on the same stage, active at the end of the arrival) */
+.explore{position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0; transition:opacity .6s;
+  background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.25) 22%, rgba(10,18,28,0) 34%)}
+.explore.on{opacity:1}
+.explore.on .floors, .explore.on .index{pointer-events:auto}
+.floors{position:absolute; left:0; top:0; overflow:visible}
+.floors .lvl{fill:rgba(205,170,99,0); stroke:rgba(255,255,255,0); stroke-width:1.5; vector-effect:non-scaling-stroke; cursor:pointer; transition:fill .25s, stroke .25s}
+.floors .lvl:hover,.floors .lvl.hot,.floors .lvl:focus-visible{fill:rgba(205,170,99,.32); stroke:rgba(255,255,255,.95); outline:none}
+.explore.on .floors .lvl{animation:breathe 2.6s ease-in-out 1}
+@keyframes breathe{0%,100%{fill:rgba(205,170,99,0)} 50%{fill:rgba(205,170,99,.16)}}
+.tip{position:absolute; left:0; top:0; z-index:6; pointer-events:none; opacity:0; transition:opacity .2s; width:max-content; max-width:280px}
+.tip.on{opacity:1}
+.tip .go{display:block; margin-top:8px; font:600 9.5px/1 var(--f-label); letter-spacing:.24em; text-transform:uppercase; color:var(--night-gold)}
+.index{position:absolute; left:var(--gut); top:56%; transform:translateY(-50%); display:grid; gap:4px; z-index:6}
+.index button{display:flex; align-items:center; flex-direction:row-reverse; justify-content:flex-end; gap:12px; background:none; border:0; cursor:pointer; padding:7px 0; color:#fff; text-shadow:0 1px 10px rgba(5,12,20,.5)}
+.index button em{font-style:normal}
+.index button span{font:600 10.5px/1 var(--f-label); letter-spacing:.2em; text-transform:uppercase; opacity:.9}
+.index button i{width:22px; height:1px; background:#fff; opacity:.6; transition:width .25s, opacity .25s}
+.index button:hover i,.index button.hot i{width:44px; opacity:1}
+.index button:hover span,.index button.hot span{opacity:1}
+.explore .ask{position:absolute; left:var(--gut); top:calc(env(safe-area-inset-top,0px) + 92px); display:grid; gap:10px; max-width:min(360px, 60vw)}
+.explore .ask h2{font-size:clamp(26px, 3.2vw, 44px); color:#fff; text-shadow:0 2px 20px rgba(5,12,20,.45)}
+.explore .ask p{color:#F1EEE6; font-size:15px; text-shadow:0 1px 12px rgba(5,12,20,.55)}
+@media (max-width:760px){
+  .index{left:max(10px, env(safe-area-inset-left, 0px))} .index button span{font-size:9.5px; letter-spacing:.16em} .index button em{display:none} .index button i{width:12px}
+  .explore .ask{max-width:62vw; top:calc(env(safe-area-inset-top,0px) + 78px)}
+  .explore .ask p{display:none}
+}
+
+/* ---------- level panel + tour (fixed overlays) ---------- */
+.overlay{position:fixed; inset:0; z-index:40; background:var(--night); color:var(--night-ink); display:flex; flex-direction:column; opacity:0; visibility:hidden; transition:opacity .35s, visibility .35s}
+.overlay.on{opacity:1; visibility:visible}
+.ov-top{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:calc(env(safe-area-inset-top,0px) + 18px) var(--gut-r) 14px var(--gut); border-bottom:1px solid rgba(232,229,220,.12)}
+.crumb{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; min-width:0}
+.crumb .label{color:var(--night-gold)}
+.crumb b{font:400 clamp(22px,2.4vw,30px)/1.1 var(--f-display)}
+.x{background:none; border:1px solid rgba(232,229,220,.3); color:var(--night-ink); padding:11px 14px; cursor:pointer; font:600 10px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; white-space:nowrap}
+.x:hover{border-color:var(--night-ink)}
+.ov-body{flex:1; min-height:0; overflow:auto}
+#panel .ov-body{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(20px,4vw,64px); padding:clamp(18px,3vw,40px) var(--gut-r) 32px var(--gut); align-items:start}
+.plan{position:relative; justify-self:center; width:100%; max-width:min(520px, 100%)}
+.plan img{width:100%; height:auto; border-radius:2px; background:#efe9df}
+.plan svg{position:absolute; inset:0; width:100%; height:100%}
+.plan .zone{fill:rgba(205,170,99,.0); stroke:rgba(205,170,99,.0); stroke-width:2; vector-effect:non-scaling-stroke; cursor:pointer; transition:fill .2s, stroke .2s}
+.plan .zone:hover,.plan .zone.hot,.plan .zone:focus-visible{fill:rgba(205,170,99,.24); stroke:#CDAA63; outline:none}
+.plan .zone.sold{fill:rgba(13,20,29,.42)}
+.plan .zone.sold:hover,.plan .zone.sold.hot{fill:rgba(13,20,29,.5); stroke:#9AA4AE}
+.soldtag{position:absolute; transform:translate(-50%,-50%); pointer-events:none; background:var(--night); color:var(--night-ink); border:1px solid var(--night-gold); padding:8px 12px; font:600 10px/1 var(--f-label); letter-spacing:.24em; text-transform:uppercase}
+.status{font:600 9.5px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; padding:7px 10px; border:1px solid rgba(143,196,150,.5); color:#A9D3AE}
+.status.sold{border-color:rgba(232,229,220,.3); color:var(--night-mute)}
+.unit.is-sold h3{color:var(--night-mute)}
+.units{display:grid; gap:14px}
+.units .lede{color:var(--night-mute); max-width:46ch}
+.unit{border:1px solid rgba(232,229,220,.14); padding:20px 22px; display:grid; gap:14px; transition:border-color .2s, background .2s}
+.unit.hot{border-color:var(--night-gold); background:var(--night-2)}
+.unit .head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap}
+.unit h3{font-size:26px}
+.unit .tagline{font:600 10px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; color:var(--night-gold)}
+.unit dl{margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.unit dt{font:600 9.5px/1.4 var(--f-label); letter-spacing:.2em; text-transform:uppercase; color:var(--night-mute)}
+.unit dd{margin:4px 0 0; font:400 19px/1.2 var(--f-display); font-variant-numeric:lining-nums}
+.unit .acts{display:flex; flex-wrap:wrap; gap:10px}
+.btn-g{display:inline-flex; align-items:center; gap:10px; background:var(--night-gold); color:#14110B; border:0; padding:14px 18px; cursor:pointer; font:600 10.5px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; text-decoration:none}
+.btn-o{display:inline-flex; align-items:center; gap:10px; background:none; color:var(--night-ink); border:1px solid rgba(232,229,220,.3); padding:13px 16px; cursor:pointer; font:600 10.5px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; text-decoration:none}
+.btn-o:hover{border-color:var(--night-ink)}
+.lvlnav{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+.lvlnav button{background:none; border:1px solid rgba(232,229,220,.16); color:var(--night-mute); padding:9px 11px; cursor:pointer; font:600 9.5px/1 var(--f-label); letter-spacing:.18em; text-transform:uppercase}
+.lvlnav button[aria-current="true"]{border-color:var(--night-gold); color:var(--night-ink)}
+
+/* the plan panel floats over the tower, which stays visible behind it */
+#panel{background:rgba(9,14,21,.72); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px)}
+/* the tour is full-bleed: the film fills the screen and the controls float on top of it */
+#tour{z-index:45}
+#tour .ov-top{position:absolute; top:0; left:0; right:0; z-index:3; border-bottom:0; background:linear-gradient(180deg, rgba(5,9,14,.72), rgba(5,9,14,0))}
+#tour .ov-body{position:absolute; inset:0; overflow:hidden}
+.screen{position:absolute; inset:0; overflow:hidden; background:var(--night); touch-action:none; cursor:grab; user-select:none; -webkit-user-select:none}
+.screen.dragging{cursor:grabbing}
+.screen .m video{opacity:0} .screen .m video.on{opacity:1}
+.swipe-hint{position:absolute; left:50%; top:50%; z-index:2; transform:translate(-50%,-50%); display:flex; align-items:center; gap:14px; padding:12px 18px; background:rgba(9,14,21,.45); color:#fff; font:600 10.5px/1 var(--f-label); letter-spacing:.22em; text-transform:uppercase; opacity:0; transition:opacity .5s; pointer-events:none}
+.swipe-hint.on{opacity:1}
+.swipe-hint i{font-style:normal; font-size:20px; letter-spacing:0; animation:nudge 1.6s ease-in-out infinite}
+.swipe-hint i:first-child{animation-direction:reverse}
+@keyframes nudge{0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)}}
+.track{position:absolute; left:var(--gut); right:var(--gut-r); bottom:calc(env(safe-area-inset-bottom,0px) + 76px); z-index:3; height:2px; background:rgba(255,255,255,.22); pointer-events:none}
+.track i{position:absolute; inset:0; background:var(--night-gold); transform-origin:0 50%; transform:scaleX(0)}
+.track span{position:absolute; top:-3px; width:2px; height:8px; margin-left:-1px; background:rgba(255,255,255,.7)}
+.tload{position:absolute; right:var(--gut-r); top:calc(env(safe-area-inset-top,0px) + 86px); z-index:3; color:#fff; text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.screen .m{position:absolute; inset:0; transition:transform .3s}
+.screen.mirror .m{transform:scaleX(-1)}
+.screen video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.screen .cap{position:absolute; left:var(--gut); bottom:calc(env(safe-area-inset-bottom,0px) + 92px); z-index:2; display:grid; gap:6px; text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.screen .cap .label{color:var(--night-gold)}
+.screen .cap b{font:400 clamp(24px,3vw,40px)/1.1 var(--f-display); color:#fff}
+.stops{position:absolute; left:0; right:0; bottom:0; z-index:3; display:flex; gap:8px; flex-wrap:wrap; padding:40px var(--gut-r) calc(env(safe-area-inset-bottom,0px) + 18px) var(--gut); align-items:center; background:linear-gradient(180deg, rgba(5,9,14,0), rgba(5,9,14,.78))}
+.stops button{background:rgba(9,14,21,.35); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); border:1px solid rgba(232,229,220,.28); color:#E3E1DA; padding:11px 14px; cursor:pointer; font:600 10px/1 var(--f-label); letter-spacing:.2em; text-transform:uppercase}
+.stops button[aria-current="true"]{border-color:var(--night-gold); color:var(--night-ink); background:var(--night-2)}
+.stops .play{margin-left:auto; background:var(--night-gold); color:#14110B; border-color:var(--night-gold)}
+.note{font-size:12.5px; color:var(--night-mute)}
+@media (max-width:900px){ #panel .ov-body{grid-template-columns:minmax(0,1fr)} .plan{max-width:420px} .unit dl{grid-template-columns:repeat(3,minmax(0,1fr))} .stops .play{margin-left:0} }
+@media (max-width:760px), (hover:none){
+  header.solid,#panel,.card,.stops button,.dn{backdrop-filter:none !important; -webkit-backdrop-filter:none !important}
+  #panel{background:rgba(9,14,21,.93)}
+}
+@media (max-width:760px){
+  .track{bottom:calc(env(safe-area-inset-bottom,0px) + 70px)}
+  .stops{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+  .stops::-webkit-scrollbar{display:none}
+  .stops button{flex:0 0 auto}
+  .stops .play{order:-1}
+  .screen .cap{bottom:calc(env(safe-area-inset-bottom,0px) + 96px)}
+}
+
+/* ---------- editorial sections ---------- */
+section.page{padding-block:clamp(84px, 12vw, 168px)}
+.eyebrow{display:flex; align-items:center; gap:14px; color:var(--gold)}
+.eyebrow::before{content:""; width:46px; height:1px; background:currentColor}
+#mayto .head{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:clamp(28px,6vw,96px); align-items:end}
+#mayto h2{font-size:clamp(34px, 5.2vw, 76px); margin-top:22px}
+#mayto .lede{color:var(--mute); max-width:44ch; font-size:18px}
+.facts{margin-top:clamp(56px,7vw,96px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line)}
+.fact{padding:26px 22px 4px 0; display:grid; gap:10px; align-content:start}
+.fact + .fact{padding-left:22px; border-left:1px solid var(--line)}
+.fact .n{font:400 clamp(40px,4.6vw,64px)/1 var(--f-display); font-variant-numeric:lining-nums tabular-nums}
+.fact .n small{font-size:.42em; margin-left:6px; color:var(--mute)}
+.fact p{color:var(--mute); font-size:15px; max-width:26ch}
+.gallery{margin-top:clamp(64px,8vw,112px); display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:clamp(14px,2vw,28px); align-items:end}
+figure{margin:0; display:grid; gap:12px}
+figure img{width:100%; height:100%; object-fit:cover}
+figcaption{font:600 10px/1.4 var(--f-label); letter-spacing:.22em; text-transform:uppercase; color:var(--mute)}
+.g-pista{grid-column:1 / span 7} .g-pista img{aspect-ratio:3/2}
+.g-cenital{grid-column:8 / span 5} .g-cenital img{aspect-ratio:3/4; border-radius:999px 999px 0 0}
+.g-noche{grid-column:2 / span 5; margin-top:clamp(24px,4vw,56px)} .g-noche img{aspect-ratio:4/5; border-radius:999px 999px 0 0}
+.g-text{grid-column:7 / span 5; align-self:center; display:grid; gap:18px; padding-block:24px}
+.g-text h3{font-size:clamp(26px,2.8vw,38px)}
+.g-text p{color:var(--mute); max-width:42ch}
+#luna{background:var(--night); color:var(--night-ink); position:relative; overflow:hidden}
+#luna .eyebrow{color:var(--night-gold)}
+#luna .grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(36px,7vw,110px); align-items:center}
+#luna h2{font-size:clamp(34px,4.8vw,70px); margin:22px 0 28px}
+#luna p.body{color:var(--night-mute); max-width:46ch; font-size:18px}
+.words{margin-top:36px; display:flex; flex-wrap:wrap; gap:10px 26px; font:400 22px/1.2 var(--f-display); color:var(--night-ink)}
+.sky{position:relative; aspect-ratio:1/1; max-width:520px; width:100%; justify-self:center}
+.sky canvas{position:absolute; inset:0; width:100%; height:100%}
+.sky .cap{position:absolute; left:0; right:0; bottom:-6px; text-align:center; color:var(--night-gold)}
+.stats{margin-top:clamp(64px,8vw,110px); display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid rgba(232,229,220,.16)}
+.stat{padding:24px 20px 0 0; display:grid; gap:8px}
+.stat + .stat{padding-left:20px; border-left:1px solid rgba(232,229,220,.16)}
+.stat .n{font:400 clamp(34px,3.8vw,54px)/1 var(--f-display); font-variant-numeric:lining-nums}
+.stat .n small{font-size:.45em; margin-left:4px; color:var(--night-mute)}
+.stat .label{color:var(--night-mute); font-size:10px}
+#espacios .top{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(28px,6vw,96px); align-items:end}
+#espacios h2{font-size:clamp(32px,4.4vw,62px); margin-top:22px}
+#espacios .top p{color:var(--mute); max-width:44ch}
+.duo{margin-top:clamp(48px,6vw,84px); display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(14px,2vw,28px); align-items:start}
+.duo .a img{aspect-ratio:5/4}
+.duo .b{margin-top:clamp(40px,8vw,120px)} .duo .b img{aspect-ratio:4/5; border-radius:999px 999px 0 0}
+.spec{display:flex; justify-content:space-between; gap:16px; border-top:1px solid var(--line); padding-top:12px}
+.spec b{font:400 20px/1.2 var(--f-display)}
+.spec span{font:600 10px/1.6 var(--f-label); letter-spacing:.22em; text-transform:uppercase; color:var(--mute); text-align:right}
+.exterior{margin-top:clamp(64px,8vw,120px); position:relative}
+.exterior img{width:100%; aspect-ratio:21/9; object-fit:cover; object-position:50% 40%}
+.exterior blockquote{margin:0; position:absolute; left:clamp(16px,4vw,56px); bottom:clamp(16px,4vw,52px); max-width:min(560px, 80%); color:#fff; font:400 clamp(22px,2.8vw,40px)/1.15 var(--f-display); text-shadow:0 2px 24px rgba(0,0,0,.35)}
+#contacto{background:var(--moon-2)}
+#contacto .grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(36px,6vw,96px)}
+#contacto h2{font-size:clamp(32px,4.4vw,62px); margin-top:22px}
+.price{margin-top:28px; font:400 clamp(26px,2.6vw,36px)/1.1 var(--f-display)}
+.price small{display:block; font:400 14px/1.5 var(--f-body); color:var(--mute); margin-top:6px}
+.plans{display:grid; border-top:1px solid var(--line)}
+.plan-p{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px 18px; padding:18px 0; border-bottom:1px solid var(--line)}
+.plan-p b{font:400 21px/1.2 var(--f-display)}
+.plan-p span{color:var(--mute); font-size:15px; grid-column:1 / -1}
+.plan-p em{font:600 10px/1.8 var(--f-label); letter-spacing:.2em; text-transform:uppercase; font-style:normal; color:var(--gold)}
+.reach{margin-top:34px; display:grid; gap:12px}
+.line{display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px}
+.line .label{color:var(--mute); min-width:9em}
+.line .v{font:400 20px/1.2 var(--f-display); user-select:all}
+.copy{font:600 10px/1 var(--f-label); letter-spacing:.2em; text-transform:uppercase; background:none; color:var(--ink); border:1px solid var(--line); padding:9px 12px; cursor:pointer}
+.copy:hover{border-color:var(--ink)}
+.btn{display:inline-flex; align-items:center; gap:10px; margin-top:28px; font:600 11px/1 var(--f-label); letter-spacing:.24em; text-transform:uppercase; text-decoration:none; color:var(--moon); background:var(--ink); padding:17px 22px}
+footer{padding-block:40px; border-top:1px solid var(--line); background:var(--moon-2)}
+footer .inner{display:flex; flex-wrap:wrap; gap:16px 32px; justify-content:space-between; align-items:center; color:var(--mute); font-size:13px}
+footer .logo{width:110px; color:var(--mute)}
+.rv{transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .rv.pre{opacity:0; transform:translateY(22px)}
+@media (max-width:900px){
+  #mayto .head, #luna .grid, #espacios .top, #contacto .grid{grid-template-columns:minmax(0,1fr)}
+  .facts, .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(3), .stat:nth-child(3){padding-left:0; border-left:0}
+  .fact:nth-child(n+3), .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .stat:nth-child(n+3){border-top-color:rgba(232,229,220,.16)}
+  .g-pista,.g-cenital,.g-noche,.g-text{grid-column:1 / -1; margin-top:0}
+  .g-cenital img,.g-noche img{aspect-ratio:4/5}
+  .duo{grid-template-columns:minmax(0,1fr)} .duo .b{margin-top:0}
+  .exterior img{aspect-ratio:4/3}
+  .sky{max-width:380px}
+}
+@media (max-width:520px){ .line .label{min-width:0; width:100%} .unit dl{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (prefers-reduced-motion: reduce){
+  .rv{transition:none} .js .rv.pre{opacity:1; transform:none}
+  .hint i,.screen img,.explore.on .floors .lvl{animation:none}
+}
+</style>
+
+<div id="loader" role="status" aria-live="polite">
+  <div class="ld">
+    <div class="logo"><div class="base" data-logo></div><div class="fill" id="ldFill" data-logo></div></div>
+    <div class="where">Mayto · Cabo Corrientes · Jalisco</div>
+  </div>
+</div>
+
+<header id="hdr">
+  <div class="row">
+    <a class="logo" href="#llegada" aria-label="Aluna Residences, inicio" data-logo></a>
+    <nav aria-label="Secciones">
+      <a href="#torre" id="navTorre">La torre</a>
+      <a href="#mayto">Mayto</a>
+      <a href="#luna">El concepto</a>
+      <a class="cta" href="#contacto">Agenda una visita</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="llegada" aria-label="Llegada a Aluna">
+    <div class="stage" id="stage">
+      <div class="media" id="media">
+        <img class="still" id="poster" alt="Mar de nubes sobre la costa de Mayto, Jalisco">
+        <video id="vidA" class="on" muted playsinline preload="auto" aria-hidden="true"></video>
+        <video id="vidB1" muted playsinline preload="auto" aria-hidden="true"></video>
+        <video id="vidB2" muted playsinline preload="auto" aria-hidden="true"></video>
+        <img class="still day" id="dayImg" alt="La torre Aluna terminada, de día">
+        <img class="still night" id="nightImg" alt="La torre Aluna de noche bajo la Vía Láctea">
+      </div>
+      <div class="scrim" id="scrim"></div>
+      <div class="hole" id="hole" aria-hidden="true"><div class="logo" data-logo></div></div>
+      <div class="intro" id="intro"><span class="label">Cabo Corrientes · Costalegre · Jalisco</span></div>
+      <div class="hint" id="hint"><span class="label">Desliza para descender</span><i></i></div>
+      <div class="pin" id="pin" aria-hidden="true">
+        <div class="dot"></div><div class="stem"></div>
+        <div class="card"><span class="label">El terreno</span><b>Aquí nacerá Aluna</b><span class="s">Templo de Cáncer · 7 niveles · 10 residencias</span></div>
+      </div>
+
+      <div class="chapter wrap" aria-live="polite"><div class="inner">
+        <div class="chap" data-chap="terreno"><span class="label">Mayto · Pacífico mexicano</span><h2>Diez residencias en la playa virgen de Mayto.</h2><p>Un lote frente al mar en el master plan de Mayto, con escritura pública, uso de suelo y Manifestación de Impacto Ambiental.</p></div>
+        <div class="chap" data-chap="estructura"><span class="label">La obra · Estructura</span><h2>Siete niveles articulados por un núcleo central.</h2><p>Planta baja con restaurante, cuatro niveles tipo, el penthouse y un último nivel con rooftop.</p></div>
+        <div class="chap" data-chap="acabados"><span class="label">Acabados</span><h2>Celosía de madera, vidrio y una alberca frente al mar.</h2></div>
+      </div></div>
+
+      <div class="explore" id="explore">
+        <div class="ask"><span class="label" style="color:#EBDDB9">Explora la torre</span><h2>Elige un nivel.</h2><p>Toca cualquier piso para ver su plano, sus residencias y el recorrido en 3D. 9 de 10 residencias disponibles.</p></div>
+        <svg class="floors" id="floors" viewBox="0 0 1 1" preserveAspectRatio="none" role="group" aria-label="Niveles de la torre"></svg>
+        <div class="index" id="index" aria-label="Lista de niveles"></div>
+        <div class="tip card" id="tip" aria-hidden="true"></div>
+        <div class="dn" role="group" aria-label="Ver la torre de día o de noche"><button type="button" data-dn="day" aria-pressed="true">Día</button><button type="button" data-dn="night" aria-pressed="false">Noche</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page wrap" id="mayto">
+    <div class="inner">
+      <div class="head">
+        <div class="rv"><span class="eyebrow label">Por qué Mayto</span><h2>Una de las playas más largas y menos desarrolladas del Pacífico mexicano.</h2></div>
+        <p class="lede rv">Mayto está en Cabo Corrientes, al sur de Puerto Vallarta, en la Costalegre de Jalisco. Se llega en avioneta a la pista propia o por carretera, y el master plan reúne doce edificios inspirados en los signos del zodiaco: el primer parque astrológico del mundo.</p>
+      </div>
+      <div class="facts rv">
+        <div class="fact"><div class="n">15<small>min</small></div><p>de vuelo desde Puerto Vallarta hasta la pista de Mayto.</p></div>
+        <div class="fact"><div class="n">2<small>km</small></div><p>de frente de playa, con liberación de tortugas en temporada.</p></div>
+        <div class="fact"><div class="n">2<small>km</small></div><p>junto al río, entre manglar y selva baja.</p></div>
+        <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
+      </div>
+      <div class="gallery">
+        <figure class="g-pista rv"><img src="media-r1/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r1/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r1/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page wrap" id="luna">
+    <div class="inner">
+      <div class="grid">
+        <div class="rv">
+          <span class="eyebrow label">El concepto</span>
+          <h2>Inspirado en Cáncer, signo de agua regido por la Luna.</h2>
+          <p class="body">Aluna celebra la calma, la sensibilidad y el sentido de hogar. De ahí su planta ovalada, la celosía de madera y los interiores de aplanados de tierra, piedra y madera, con vistas al mar desde cada nivel.</p>
+          <div class="words" aria-label="Atributos del signo"><span>Luna</span><span>Agua</span><span>Sensibilidad</span><span>Intuición</span><span>Protección</span><span>Hogar</span></div>
+        </div>
+        <div class="sky rv" aria-hidden="true"><canvas id="sky"></canvas><span class="cap label">Constelación de Cáncer</span></div>
+      </div>
+      <div class="stats rv">
+        <div class="stat"><div class="n">10</div><span class="label">Residencias</span></div>
+        <div class="stat"><div class="n">7</div><span class="label">Niveles</span></div>
+        <div class="stat"><div class="n">209<small>m²</small></div><span class="label">Residencia tipo</span></div>
+        <div class="stat"><div class="n">426.31<small>m²</small></div><span class="label">Penthouse</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page wrap" id="espacios">
+    <div class="inner">
+      <div class="top">
+        <div class="rv"><span class="eyebrow label">Espacios</span><h2>La experiencia comienza desde la llegada.</h2></div>
+        <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
+      </div>
+      <div class="duo">
+        <figure class="a rv"><img src="media-r1/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r1/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+      </div>
+      <div class="exterior rv"><img src="media-r1/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+    </div>
+  </section>
+
+  <section class="page wrap" id="contacto">
+    <div class="inner grid">
+      <div class="rv">
+        <span class="eyebrow label">Preventa</span>
+        <h2>Agenda una visita privada a Mayto.</h2>
+        <p class="price">Desde $18,810,000 MXN<small>Residencias de 209 m². El precio varía según el nivel; el penthouse tiene precio especial. Lista por unidad a solicitud. Quedan 9 de 10 residencias.</small></p>
+        <div class="reach">
+          <div class="line"><span class="label">WhatsApp</span><span class="v" id="tel">+52 33 4638 0903</span><button class="copy" data-copy="tel" type="button">Copiar</button></div>
+          <div class="line"><span class="label">Correo</span><span class="v" id="mail">properties@ratito.mx</span><button class="copy" data-copy="mail" type="button">Copiar</button></div>
+        </div>
+        <a class="btn" href="https://wa.me/523346380903?text=Hola%2C%20me%20interesa%20Aluna%20Residences%20en%20Mayto" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+      <div class="plans rv" aria-label="Formas de pago">
+        <div class="plan-p"><b>Plan estándar</b><em>30 / 70</em><span>30 % de enganche y el 70 % restante en 24 mensualidades sin intereses.</span></div>
+        <div class="plan-p"><b>Plan 50 %</b><em>5 % desc.</em><span>50 % inicial y el saldo en 24 mensualidades sin intereses.</span></div>
+        <div class="plan-p"><b>Contado</b><em>10 % desc.</em><span>Descuento sobre el precio de lista.</span></div>
+        <div class="plan-p"><b>Respaldo legal</b><em>Escriturable</em><span>Escritura pública, régimen condominal, Manifestación de Impacto Ambiental, licencia de construcción y aeródromo autorizado.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="inner">
+    <span class="logo" data-logo></span>
+    <span>Aluna Residences · Mayto, Cabo Corrientes, Jalisco</span>
+    <span>Imágenes ilustrativas. Precios sujetos a cambio sin previo aviso.</span>
+  </div>
+</footer>
+
+<!-- level panel -->
+<div class="overlay" id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <div class="ov-top">
+    <div class="crumb"><span class="label" id="pEyebrow">Nivel</span><b id="pTitle">Nivel</b></div>
+    <button class="x" type="button" data-close="panel">Volver a la torre</button>
+  </div>
+  <div class="ov-body">
+    <div class="plan" id="plan"><img id="planImg" alt=""><svg id="planSvg" viewBox="0 0 1 1" preserveAspectRatio="none"></svg></div>
+    <div class="units">
+      <p class="lede" id="pLede"></p>
+      <div id="unitList" class="units"></div>
+      <div><span class="label" style="color:var(--night-mute)">Otros niveles</span><div class="lvlnav" id="lvlNav"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3D tour -->
+<div class="overlay" id="tour" role="dialog" aria-modal="true" aria-labelledby="tTitle">
+  <div class="ov-top">
+    <div class="crumb"><span class="label" id="tEyebrow">Recorrido 3D</span><b id="tTitle">Residencia</b></div>
+    <button class="x" type="button" data-close="tour">Volver al plano</button>
+  </div>
+  <div class="ov-body">
+    <div class="screen" id="screen">
+      <div class="m" id="tm"></div>
+      <div class="cap"><span class="label" id="tStopNo"></span><b id="tStop"></b></div>
+      <div class="swipe-hint" id="swipeHint" aria-hidden="true"><i>‹</i><span>Desliza para recorrer</span><i>›</i></div>
+      <div class="track" id="track" aria-hidden="true"><i id="trackFill"></i></div>
+      <span class="tload label" id="tLoad" hidden></span>
+    </div>
+    <div class="stops" id="stops"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  document.documentElement.classList.add('js');
+  const $ = id => document.getElementById(id);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const smooth = t => t * t * (3 - 2 * t);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
+  const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
+  const M = PHONE ? 'media-r1/v/' : 'media-r1/hd/';
+  const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
+  // Positions measured on each set's frames (x, y as a share of the frame).
+  const GEO = PHONE ? {
+    tower:{x0:.188, x1:.817},
+    hole:[{t:0, x:.48, y:.72, s:1, o:1}, {t:1, x:.49, y:.71, s:1.08, o:1}, {t:1.6, x:.50, y:.70, s:1.3, o:.9}, {t:2.2, x:.50, y:.69, s:1.8, o:.4}, {t:2.6, x:.50, y:.68, s:2.4, o:0}],
+    logoW:.62, site:{x:.69, y:.55},
+    y:{n6:[.240,.319], n5:[.319,.381], n4:[.381,.442], n3:[.442,.502], n2:[.502,.561], n1:[.561,.621], pb:[.621,.693]}
+  } : {
+    tower:{x0:.338, x1:.662},
+    hole:[{t:0, x:.490, y:.790, s:1, o:1}, {t:1, x:.500, y:.785, s:1.08, o:1}, {t:1.5, x:.510, y:.780, s:1.2, o:1}, {t:2, x:.530, y:.770, s:1.45, o:.85}, {t:2.5, x:.560, y:.760, s:2, o:.4}, {t:2.9, x:.590, y:.760, s:2.8, o:0}],
+    logoW:.25, site:{x:.618, y:.601},
+    y:{n6:[.071,.205], n5:[.205,.306], n4:[.306,.410], n3:[.410,.513], n2:[.513,.616], n1:[.616,.718], pb:[.718,.846]}
+  };
+  const TOWER_BOX = GEO.tower;
+
+  // ---------- data ----------
+  const LEVELS = [
+    {id:'n6', short:'N6', name:'Nivel 6', title:'Residencia + Rooftop', plan:6, lede:'Una residencia de 209 m² y el rooftop común: gimnasio, cocina y lounge para eventos, áreas sociales y jacuzzi al atardecer.',
+      units:[{k:'res', zone:[.169,.5], tag:'A', sold:true}, {k:'roof', zone:[.5,.831], tag:'R'}]},
+    {id:'n5', short:'N5', name:'Nivel 5', title:'Penthouse', plan:5, lede:'La residencia culminante del conjunto ocupa el nivel completo. Más espacio. Más horizonte. Más silencio.',
+      units:[{k:'ph', zone:[.169,.831], tag:'PH'}]},
+    {id:'n4', short:'N4', name:'Nivel 4', title:'2 residencias', plan:4},
+    {id:'n3', short:'N3', name:'Nivel 3', title:'2 residencias', plan:3},
+    {id:'n2', short:'N2', name:'Nivel 2', title:'2 residencias', plan:2},
+    {id:'n1', short:'N1', name:'Nivel 1', title:'2 residencias', plan:1},
+    {id:'pb', short:'PB', name:'Planta baja', title:'Lobby y restaurante', plan:0, lede:'Recepción, convivencia y hospitalidad en una sola planta abierta hacia la alberca y el mar.',
+      units:[{k:'pb', zone:[.12,.88], y:[.06,.97], tag:''}]}
+  ];
+  const TYPICAL_LEDE = 'Dos residencias de 209 m² por nivel, abiertas al perímetro: estancia, comedor y cocina hacia el mar, dos recámaras con baño propio y balcones alrededor de la envolvente curva.';
+  LEVELS.forEach(l => { l.y = GEO.y[l.id]; if (!l.units){ l.units = [{k:'res', zone:[.169,.5], tag:'A'}, {k:'res', zone:[.5,.831], tag:'B'}]; l.lede = TYPICAL_LEDE; } });
+  const KINDS = {
+    res:  {name:'Residencia', area:'209 m²', a:'2 recámaras', b:'2 baños', price:'Desde $18,810,000 MXN', tour:'tipo', kind:'Residencia tipo'},
+    ph:   {name:'Penthouse', area:'426.31 m²', a:'4 recámaras', b:'4.5 baños', price:'Precio especial a solicitud', tour:'ph', kind:'Una sola unidad'},
+    pb:   {name:'Lobby y restaurante', area:'445.19 m²', a:'Área común', b:'Alberca frente al mar', price:'', tour:'pb', kind:'Área común'},
+    roof: {name:'Rooftop', area:'Área común', a:'Gimnasio', b:'Jacuzzi', price:'', tour:'roof', kind:'Área común'}
+  };
+  // Each tour is a chain of clips; clip i starts where clip i-1 ends, so together they play as one walk.
+  const TOURS = {
+    tipo: {img:'maqueta-tipo', stops:[{t:'Cocina y comedor', v:'tipo-1'}, {t:'Estancia', v:'tipo-2'}, {t:'Recámara principal', v:'tipo-3'}, {t:'Baño principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
+    ph:   {img:'maqueta-ph',   stops:[{t:'Estancia frente al mar', v:'ph-1'}, {t:'Cocina y comedor', v:'ph-2'}, {t:'Suite principal', v:'ph-3'}]},
+    pb:   {img:'maqueta-pb',   stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
+    roof: {img:'maqueta-n6',   stops:[{t:'Jacuzzi al atardecer', v:'rooftop-1'}, {t:'Gimnasio', v:'rooftop-2'}, {t:'Cocina y mesa para eventos', v:'rooftop-3'}]}
+  };
+
+  // ---------- the arrival timeline: scroll lengths in viewport heights ----------
+  // A: the dive, landing on the empty lot. B1 + B2: the descent around the lot while the tower is built, ending on the finished tower.
+  const FILMS = {A:'vuelo.mp4', B1:'obra-1.mp4', B2:'obra-2.mp4'};
+  const A_LAND = 7.96, END = 7.0;
+  const SEG = [
+    {len:2.6, v:'A',  t:[0, A_LAND]},
+    {len:0.8, v:'A',  t:[A_LAND, A_LAND], chap:'terreno', pin:true},
+    {len:2.3, v:'B1', t:[0, END], chap:'estructura'},
+    {len:0.8, v:'B2', t:[0, 2.4], chap:'estructura'},
+    {len:1.5, v:'B2', t:[2.4, END], chap:'acabados'},
+    {len:1.3, v:'B2', t:[END, END], explore:true}
+  ];
+  const TOTAL = SEG.reduce((s, x) => s + x.len, 0);
+  const sec = $('llegada'), stage = $('stage'), media = $('media');
+  sec.style.height = `calc(${TOTAL * 100}vh + 100vh)`;
+  function holeAt(t){
+    const H_ = GEO.hole;
+    if (t <= H_[0].t) return H_[0];
+    for (let i = 1; i < H_.length; i++){ const a = H_[i-1], b = H_[i];
+      if (t <= b.t){ const k = smooth((t - a.t) / (b.t - a.t)); return {x:lerp(a.x,b.x,k), y:lerp(a.y,b.y,k), s:lerp(a.s,b.s,k), o:lerp(a.o,b.o,k)}; } }
+    return H_[H_.length - 1];
+  }
+
+  // ---------- framing: the frame covers the screen; it is only re-measured on resize ----------
+  let W = 0, H = 0, box = {s:1, ox:0, oy:0};
+  const toScreen = (nx, ny) => [box.ox + nx * VW * box.s, box.oy + ny * VH * box.s];
+  function layout(){
+    W = stage.clientWidth; H = stage.clientHeight;
+    const s = Math.max(W / VW, H / VH);
+    box = {s, ox:(W - VW * s) / 2, oy:(H - VH * s) / 2};
+    media.style.width = VW + 'px'; media.style.height = VH + 'px';
+    media.style.transform = `translate3d(${box.ox}px, ${box.oy}px, 0) scale(${s})`;
+    const f = $('floors');
+    f.style.width = VW * s + 'px'; f.style.height = VH * s + 'px';
+    f.style.transform = `translate3d(${box.ox}px, ${box.oy}px, 0)`;
+    dirty = true;
+  }
+
+  // ---------- logo ----------
+  const logoReady = fetch('media-r1/aluna-logo.svg').then(r => r.text()).then(svg => {
+    svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
+             .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
+    document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
+  }).catch(() => { document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = '<span style="font:400 28px/1 var(--f-display);letter-spacing:.12em">ALUNA</span>'); });
+
+  // ---------- loading: the dive loads behind the logo; the construction films follow in the background ----------
+  const fill = $('ldFill');
+  const setProg = p => fill.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`;
+  const blobCache = new Map();
+  async function fetchBlob(url, onProg){
+    if (blobCache.has(url)) return blobCache.get(url);
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status);
+    const total = +res.headers.get('content-length') || 0;
+    let blob;
+    if (res.body && res.body.getReader && onProg && total){
+      const rd = res.body.getReader(), parts = []; let got = 0;
+      for (;;){ const {done, value} = await rd.read(); if (done) break; parts.push(value); got += value.length; onProg(got / total); }
+      blob = new Blob(parts, {type:'video/mp4'});
+    } else blob = await res.blob();
+    const u = URL.createObjectURL(blob); blobCache.set(url, u); return u;
+  }
+  const vids = {A:$('vidA'), B1:$('vidB1'), B2:$('vidB2')};
+  const ready = {A:false, B1:false, B2:false}, seeking = {A:false, B1:false, B2:false};
+  Object.keys(vids).forEach(k => vids[k].addEventListener('seeked', () => { seeking[k] = false; }));
+  function attach(k, url){
+    return new Promise(ok => { const v = vids[k];
+      v.addEventListener('loadeddata', () => { ready[k] = true; dirty = true; ok(); }, {once:true});
+      v.addEventListener('error', () => ok(), {once:true});
+      v.src = url; v.load(); });
+  }
+  async function boot(){
+    await logoReady;
+    try { await attach('A', await fetchBlob(M + FILMS.A, p => setProg(Math.min(.98, p)))); } catch (e) {}
+    setProg(1);
+    setTimeout(() => $('loader').classList.add('done'), 300);
+    for (const k of ['B1', 'B2']){ try { await attach(k, await fetchBlob(M + FILMS[k])); } catch (e) {} }
+    // the explorer stills come last
+    $('dayImg').src = M + 'torre-dia.jpg'; $('nightImg').src = M + 'torre-noche.jpg';
+  }
+
+  // ---------- scroll → (film, time, overlays) ----------
+  let prog = 0, target = {v:'A', t:0, seg:SEG[0], k:0}, shown = {v:'A', t:0}, onFilm = 'A', dirty = true;
+  function locate(p){
+    let u = p * TOTAL;
+    for (const s of SEG){ if (u <= s.len) return {seg:s, k:s.len ? u / s.len : 1}; u -= s.len; }
+    return {seg:SEG[SEG.length - 1], k:1};
+  }
+  function onScroll(){
+    const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight;
+    prog = span > 0 ? clamp(-r.top / span, 0, 1) : 1;
+    const {seg, k} = locate(prog);
+    target = {v:seg.v, t:lerp(seg.t[0], seg.t[1], k), seg, k};
+    $('hdr').classList.toggle('solid', r.bottom < 80);
+    dirty = true;
+  }
+
+  const hole = $('hole'), pin = $('pin'), hint = $('hint'), intro = $('intro'), scrim = $('scrim'), poster = $('poster'), explore = $('explore');
+  const chaps = [...document.querySelectorAll('.chap')];
+  let lastChap = null, lastExplore = null, lastPin = null;
+  function frame(){
+    requestAnimationFrame(frame);
+    const moving = shown.v !== target.v || Math.abs(target.t - shown.t) > .0015;
+    if (!moving && !dirty) return;          // nothing changed: no work this frame
+    dirty = false;
+    if (shown.v !== target.v) shown = {v:target.v, t:target.t};
+    else shown.t = Math.abs(target.t - shown.t) < .0015 ? target.t : lerp(shown.t, target.t, .22);
+
+    // the film on screen: if the next film is still downloading, hold the last frame we have
+    if (ready[shown.v] && onFilm !== shown.v){ vids[onFilm].classList.remove('on'); vids[shown.v].classList.add('on'); onFilm = shown.v; }
+    const v = vids[onFilm];
+    const t = onFilm === shown.v ? shown.t : (onFilm === 'A' ? A_LAND : END);
+    if (ready[onFilm] && !seeking[onFilm] && Math.abs(v.currentTime - t) > 1 / 48){ seeking[onFilm] = true; v.currentTime = t; }
+    if (ready.A && (shown.t > .02 || shown.v !== 'A') && !poster.hidden) poster.hidden = true;
+
+    // logo in the cloud hole
+    const h = shown.v === 'A' ? holeAt(shown.t) : {o:0, x:.5, y:.5, s:1};
+    if (h.o > 0){
+      const [hx, hy] = toScreen(h.x, h.y), lw = Math.min(VW * box.s * GEO.logoW, W * .62);
+      hole.style.width = lw + 'px';
+      hole.style.transform = `translate3d(${hx - lw / 2}px, ${hy - lw * .2}px, 0) scale(${h.s})`;
+    }
+    hole.style.opacity = h.o;
+    const io = clamp(1 - prog * 30, 0, 1); intro.style.opacity = hint.style.opacity = io;
+
+    // pin on the empty lot
+    const seg = target.seg;
+    const pinOn = !!seg.pin && shown.v === 'A' && Math.abs(shown.t - A_LAND) < .25;
+    if (pinOn){
+      const [tx, ty] = toScreen(GEO.site.x, GEO.site.y), stem = Math.max(60, Math.min(120, H * .12));
+      pin.style.transform = `translate3d(${clamp(tx, 24, W - 24)}px, ${ty}px, 0)`; pin.style.setProperty('--stem', stem + 'px');
+      const card = pin.querySelector('.card'), room = W - tx - 16;
+      card.style.left = (card.offsetWidth > room ? -(card.offsetWidth - room) : -1) + 'px';
+    }
+    if (pinOn !== lastPin){ pin.classList.toggle('on', pinOn); lastPin = pinOn; }
+
+    // chapter captions and the explorer
+    const chap = seg.chap || '';
+    const exploring = !!seg.explore && shown.v === 'B2' && shown.t > END - .25;
+    if (chap !== lastChap){ chaps.forEach(c => c.classList.toggle('on', c.dataset.chap === chap)); lastChap = chap; }
+    if (exploring !== lastExplore){ explore.classList.toggle('on', exploring); stage.classList.toggle('exploring', exploring); lastExplore = exploring; }
+    scrim.style.setProperty('--scrim', chap || exploring ? .85 : .35);
+    if (exploring) placeTip();
+  }
+
+  // ---------- day / night on the finished tower ----------
+  document.querySelectorAll('[data-dn]').forEach(b => b.addEventListener('click', () => {
+    const night = b.dataset.dn === 'night';
+    stage.classList.toggle('night', night);
+    document.querySelectorAll('[data-dn]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+
+  // ---------- explorer on the finished tower ----------
+  const floors = $('floors'), index = $('index'), tip = $('tip');
+  const NS = 'http://www.w3.org/2000/svg';
+  let hot = null;
+  LEVELS.forEach(l => {
+    const r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', TOWER_BOX.x0); r.setAttribute('width', TOWER_BOX.x1 - TOWER_BOX.x0);
+    r.setAttribute('y', l.y[0]); r.setAttribute('height', l.y[1] - l.y[0]);
+    r.setAttribute('class', 'lvl'); r.setAttribute('tabindex', '0'); r.setAttribute('role', 'button');
+    r.setAttribute('aria-label', `${l.name}: ${l.title}`); r.dataset.id = l.id;
+    floors.appendChild(r);
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.id = l.id;
+    b.innerHTML = `<span>${l.short}<em> · ${l.title}</em></span><i></i>`;
+    b.setAttribute('aria-label', `Ver ${l.name}, ${l.title}`);
+    index.appendChild(b);
+  });
+  const byId = id => LEVELS.find(l => l.id === id);
+  function setHot(id){
+    hot = id;
+    floors.querySelectorAll('.lvl').forEach(r => r.classList.toggle('hot', r.dataset.id === id));
+    index.querySelectorAll('button').forEach(b => b.classList.toggle('hot', b.dataset.id === id));
+    if (!id){ tip.classList.remove('on'); return; }
+    const l = byId(id), n = l.units.filter(u => u.k === 'res').length;
+    const line = l.id === 'pb' ? '445.19 m² · Área común' : l.id === 'n5' ? '426.31 m² · 4 recámaras' : l.id === 'n6' ? 'Residencia 6A vendida · Rooftop común' : `${n} residencias de 209 m²`;
+    tip.innerHTML = `<span class="label">${l.name}</span><b>${l.title}</b><span class="s">${line}</span><span class="go">Ver plano y recorrido →</span>`;
+    tip.classList.add('on'); placeTip();
+  }
+  function placeTip(){
+    if (!hot) return;
+    const l = byId(hot), [x, y0] = toScreen(TOWER_BOX.x1, l.y[0]), [, y1] = toScreen(TOWER_BOX.x1, l.y[1]);
+    const tw = tip.offsetWidth, th = tip.offsetHeight, room = W - x - 24;
+    let left = room > tw ? x + 18 : toScreen(TOWER_BOX.x0, 0)[0] - tw - 18;
+    if (left < 12) left = clamp(W / 2 - tw / 2, 12, W - tw - 12);
+    const top = clamp((y0 + y1) / 2 - th / 2, 70, H - th - 12);
+    tip.style.transform = `translate(${left}px, ${top}px)`;
+  }
+  floors.addEventListener('pointerover', e => { const id = e.target.dataset && e.target.dataset.id; if (id) setHot(id); });
+  floors.addEventListener('pointerleave', () => setHot(null));
+  floors.addEventListener('click', e => { const id = e.target.dataset && e.target.dataset.id; if (id) openLevel(id); });
+  floors.addEventListener('keydown', e => { const id = e.target.dataset && e.target.dataset.id; if (id && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openLevel(id); } });
+  floors.addEventListener('focusin', e => { const id = e.target.dataset && e.target.dataset.id; if (id) setHot(id); });
+  index.addEventListener('pointerover', e => { const b = e.target.closest('button'); if (b) setHot(b.dataset.id); });
+  index.addEventListener('pointerleave', () => setHot(null));
+  index.addEventListener('click', e => { const b = e.target.closest('button'); if (b) openLevel(b.dataset.id); });
+
+  // ---------- level panel ----------
+  const panel = $('panel'), tour = $('tour');
+  let current = null, lastFocus = null;
+  function openOverlay(el){ lastFocus = lastFocus || document.activeElement; el.classList.add('on'); document.body.classList.add('locked'); setTimeout(() => el.querySelector('.x').focus(), 50); }
+  function closeOverlay(el){
+    el.classList.remove('on');
+    if (el === tour){ tToken++; TV.forEach(v => v.pause()); mode = 'idle'; }
+    if (!panel.classList.contains('on') && !tour.classList.contains('on')){ document.body.classList.remove('locked'); if (lastFocus) lastFocus.focus(); lastFocus = null; }
+    else if (el === tour) panel.querySelector('.x').focus();
+  }
+  document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeOverlay($(b.dataset.close))));
+  addEventListener('keydown', e => { if (e.key === 'Escape'){ if (tour.classList.contains('on')) closeOverlay(tour); else if (panel.classList.contains('on')) closeOverlay(panel); } });
+
+  function unitTitle(l, u){
+    const k = KINDS[u.k];
+    if (u.k === 'res') return `${k.name} ${l.id === 'n6' ? '6A' : l.short.replace('N','') + u.tag}`;
+    return k.name;
+  }
+  function openLevel(id){
+    const l = byId(id); current = l;
+    $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
+    const img = $('planImg'); img.src = `media-r1/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const svg = $('planSvg'); svg.innerHTML = '';
+    const list = $('unitList'); list.innerHTML = '';
+    $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
+    l.units.forEach((u, i) => {
+      const k = KINDS[u.k], y = u.y || [.09, .668];
+      const r = document.createElementNS(NS, 'rect');
+      r.setAttribute('x', u.zone[0]); r.setAttribute('width', u.zone[1] - u.zone[0]); r.setAttribute('y', y[0]); r.setAttribute('height', y[1] - y[0]);
+      r.setAttribute('class', u.sold ? 'zone sold' : 'zone'); r.setAttribute('tabindex', '0');
+      if (u.sold){ const t = document.createElement('span'); t.className = 'soldtag'; t.textContent = 'Vendida';
+        t.style.left = (u.zone[0] + u.zone[1]) / 2 * 100 + '%'; t.style.top = (y[0] + y[1]) / 2 * 100 + '%'; $('plan').appendChild(t); } r.setAttribute('role', 'button'); r.setAttribute('aria-label', `Recorrido 3D: ${unitTitle(l, u)}`); r.dataset.i = i;
+      svg.appendChild(r);
+      const card = document.createElement('div'); card.className = 'unit'; card.dataset.i = i;
+      const owned = u.k === 'res' || u.k === 'ph';
+      if (u.sold) card.classList.add('is-sold');
+      card.innerHTML = `<div class="head"><h3>${unitTitle(l, u)}</h3>${owned ? `<span class="status${u.sold ? ' sold' : ''}">${u.sold ? 'Vendida' : 'Disponible'}</span>` : `<span class="tagline">${k.kind}</span>`}</div>
+        <dl><div><dt>Superficie</dt><dd>${k.area}</dd></div><div><dt>${u.k === 'res' || u.k === 'ph' ? 'Recámaras' : 'Incluye'}</dt><dd>${k.a}</dd></div><div><dt>${u.k === 'res' || u.k === 'ph' ? 'Baños' : 'Además'}</dt><dd>${k.b}</dd></div></dl>
+        ${u.sold ? `<span class="note">Esta residencia ya fue vendida. Puedes ver su recorrido: la residencia tipo es igual en los niveles 1 a 4.</span>` : k.price ? `<span class="note">${k.price}</span>` : ''}
+        <div class="acts"><button class="btn-g" type="button" data-tour="${i}">Recorrido 3D</button>${owned && !u.sold ? `<a class="btn-o" target="_blank" rel="noopener" href="https://wa.me/523346380903?text=${encodeURIComponent('Hola, me interesa ' + unitTitle(l, u) + ' (' + l.name + ') de Aluna Residences en Mayto.')}">Pedir disponibilidad</a>` : ''}</div>`;
+      list.appendChild(card);
+    });
+    const nav = $('lvlNav'); nav.innerHTML = '';
+    [...LEVELS].reverse().forEach(x => { const b = document.createElement('button'); b.type = 'button'; b.textContent = x.short; b.setAttribute('aria-current', x.id === l.id); b.setAttribute('aria-label', x.name); b.addEventListener('click', () => openLevel(x.id)); nav.appendChild(b); });
+    openOverlay(panel);
+  }
+  const zoneHot = i => { $('planSvg').querySelectorAll('.zone').forEach(z => z.classList.toggle('hot', z.dataset.i == i)); $('unitList').querySelectorAll('.unit').forEach(c => c.classList.toggle('hot', c.dataset.i == i)); };
+  $('planSvg').addEventListener('pointerover', e => { if (e.target.dataset.i != null) zoneHot(e.target.dataset.i); });
+  $('planSvg').addEventListener('pointerleave', () => zoneHot(-1));
+  $('planSvg').addEventListener('click', e => { if (e.target.dataset.i != null) openTour(+e.target.dataset.i); });
+  $('planSvg').addEventListener('keydown', e => { if (e.target.dataset.i != null && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openTour(+e.target.dataset.i); } });
+  $('unitList').addEventListener('pointerover', e => { const c = e.target.closest('.unit'); if (c) zoneHot(c.dataset.i); });
+  $('unitList').addEventListener('click', e => { const b = e.target.closest('[data-tour]'); if (b) openTour(+b.dataset.tour); });
+
+  // ---------- 3D tour: one continuous walk per residence; swipe, drag, scroll or tap a room ----------
+  // Keypoints: 0 = the cutaway model, i = the end of clip i (room i). A slow drag moves the camera with the finger and
+  // stops where the finger stops; a quick flick glides to the next room in that direction.
+  const screen = $('screen'), tm = $('tm'), track = $('track'), trackFill = $('trackFill'), tLoad = $('tLoad'), swipeHint = $('swipeHint');
+  const CLIP = 5.0;                          // usable length of each clip (they are 5.04 s)
+  let T = null, TV = [], tLoaded = [], tSeek = [], tShown = 0, tTarget = 0, tOn = -1, mode = 'idle', chainTo = 0, tToken = 0, tKey = '';
+  let drag = null, wheelIdle = 0;
+  const keypoints = () => Array.from({length:T.stops.length + 1}, (_, i) => i * CLIP);
+  const tTotal = () => T.stops.length * CLIP;
+  function openTour(i){
+    const l = current, u = l.units[i], k = KINDS[u.k]; T = TOURS[k.tour]; tKey = k.tour;
+    $('tEyebrow').textContent = `${l.name} · Recorrido 3D`; $('tTitle').textContent = unitTitle(l, u);
+    screen.classList.toggle('mirror', u.tag === 'B');      // unit B is the mirror image of unit A on every typical level
+    tm.innerHTML = ''; tOn = -1;
+    TV = T.stops.map((s, j) => { const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
+      if (j === 0) v.poster = M + T.img + '.jpg';
+      v.addEventListener('seeked', () => { tSeek[j] = false; });
+      tm.appendChild(v); return v; });
+    tLoaded = TV.map(() => false); tSeek = TV.map(() => false);
+    TV[0].classList.add('on'); tOn = 0;
+    // ticks on the progress line
+    track.querySelectorAll('span').forEach(s => s.remove());
+    keypoints().forEach((p, j) => { const s = document.createElement('span'); s.style.left = (p / tTotal() * 100) + '%'; track.appendChild(s); });
+    const stops = $('stops'); stops.innerHTML = '';
+    const mk = (label, j) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.addEventListener('click', () => { stopAuto(); tTarget = keypoints()[j]; mode = 'glide'; }); stops.appendChild(b); };
+    mk('Maqueta 3D', 0); T.stops.forEach((s, j) => mk(s.t, j + 1));
+    const p = document.createElement('button'); p.type = 'button'; p.className = 'play'; p.textContent = 'Recorrido completo';
+    p.addEventListener('click', () => { tShown = tTarget = 0; startAuto(T.stops.length); }); stops.appendChild(p);
+    tShown = tTarget = 0; swipeHint.classList.add('on');
+    openOverlay(tour);
+    // load the clips one after another so the first room is ready as soon as possible
+    const token = ++tToken;
+    (async () => {
+      for (let j = 0; j < TV.length; j++){
+        tLoad.textContent = `Cargando recorrido ${Math.round(j / TV.length * 100)} %`; tLoad.hidden = false;
+        try { const url = await fetchBlob(M + T.stops[j].v + '.mp4'); if (token !== tToken) return; TV[j].src = url; TV[j].load();
+              await new Promise(r => { TV[j].addEventListener('loadeddata', r, {once:true}); TV[j].addEventListener('error', r, {once:true}); });
+              tLoaded[j] = true; if (j === 0) startAuto(1); } catch (e) {}
+      }
+      if (token === tToken) tLoad.hidden = true;
+    })();
+    requestAnimationFrame(tick);
+  }
+  // auto mode plays the clips natively (smoothest on phones) up to keypoint `to`
+  function startAuto(to){ chainTo = to; mode = 'auto'; const j = Math.min(T.stops.length - 1, Math.floor(tShown / CLIP + 1e-3)); playClip(j, tShown - j * CLIP); }
+  function playClip(j, at){ if (!tLoaded[j]) return; showClip(j); const v = TV[j]; try { v.currentTime = Math.max(0, at); } catch (e) {} v.play().catch(() => {}); }
+  function stopAuto(){ if (mode === 'auto'){ TV.forEach(v => v.pause()); } mode = 'idle'; swipeHint.classList.remove('on'); }
+  function showClip(j){ if (tOn === j) return; if (TV[tOn]) TV[tOn].classList.remove('on'); TV[j].classList.add('on'); tOn = j; }
+  function tick(){
+    if (!tour.classList.contains('on')) return;
+    requestAnimationFrame(tick);
+    const n = T.stops.length, total = tTotal();
+    if (mode === 'auto'){
+      const v = TV[tOn];
+      tShown = tTarget = tOn * CLIP + Math.min(CLIP, v.currentTime);
+      if (v.currentTime >= CLIP - .03 || v.ended){
+        if (tOn + 1 < chainTo && tLoaded[tOn + 1]){ playClip(tOn + 1, 0); }
+        else if (tOn + 1 < chainTo){ v.pause(); }              // next room still loading: wait on this frame
+        else { v.pause(); mode = 'idle'; tShown = tTarget = (tOn + 1) * CLIP; }
+      }
+    } else {
+      tTarget = clamp(tTarget, 0, total);
+      tShown = drag ? tTarget : (Math.abs(tTarget - tShown) < .004 ? tTarget : lerp(tShown, tTarget, .18));
+      const j = Math.min(n - 1, Math.floor(tShown / CLIP)), local = Math.min(CLIP - .04, tShown - j * CLIP);
+      if (tLoaded[j]){ showClip(j); const v = TV[j]; if (!v.paused) v.pause();
+        if (!tSeek[j] && Math.abs(v.currentTime - local) > 1 / 48){ tSeek[j] = true; v.currentTime = local; } }
+    }
+    // caption: the nearest keypoint
+    const kp = Math.round(tShown / CLIP);
+    $('tStopNo').textContent = kp === 0 ? 'Vista general' : `Parada ${kp} de ${n}`;
+    $('tStop').textContent = kp === 0 ? 'Maqueta 3D' : T.stops[kp - 1].t;
+    $('stops').querySelectorAll('button:not(.play)').forEach((b, x) => b.setAttribute('aria-current', x === kp));
+    trackFill.style.transform = `scaleX(${tShown / total})`;
+  }
+  const SENS = () => CLIP / (Math.min(innerWidth, innerHeight) * .9);   // one room per ~90 % of the short side
+  screen.addEventListener('pointerdown', e => {
+    if (e.target.closest('button')) return;
+    stopAuto(); screen.setPointerCapture(e.pointerId); screen.classList.add('dragging');
+    drag = {x:e.clientX, y:e.clientY, samples:[{t:performance.now(), d:0}], sum:0};
+    tTarget = tShown;
+  });
+  screen.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+    const d = Math.abs(dx) >= Math.abs(dy) ? -dx : -dy;                  // swipe left or up = forward
+    drag.sum += d; tTarget = clamp(tTarget + d * SENS() * (screen.classList.contains('mirror') && Math.abs(dx) >= Math.abs(dy) ? 1 : 1), 0, tTotal());
+    const now = performance.now(); drag.samples.push({t:now, d:drag.sum}); while (drag.samples.length > 2 && now - drag.samples[0].t > 90) drag.samples.shift();
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    const s = drag.samples, a = s[0], b = s[s.length - 1], v = (b.d - a.d) / Math.max(16, b.t - a.t);   // px per ms
+    drag = null; screen.classList.remove('dragging');
+    if (Math.abs(v) > .45){                                             // a flick: glide to the next room that way
+      const kps = keypoints(), here = tShown;
+      const next = v > 0 ? kps.find(p => p > here + .15) : [...kps].reverse().find(p => p < here - .15);
+      if (next != null) tTarget = next;
+    }
+    mode = 'glide';
+  };
+  screen.addEventListener('pointerup', endDrag); screen.addEventListener('pointercancel', endDrag);
+  screen.addEventListener('wheel', e => {
+    e.preventDefault(); stopAuto();
+    const d = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    tTarget = clamp(tTarget + d * CLIP / 900, 0, tTotal()); mode = 'glide';
+  }, {passive:false});
+  addEventListener('keydown', e => {
+    if (!tour.classList.contains('on') || !T) return;
+    const kps = keypoints(), here = tTarget;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); stopAuto(); const n = kps.find(p => p > here + .15); if (n != null) tTarget = n; mode = 'glide'; }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); stopAuto(); const n = [...kps].reverse().find(p => p < here - .15); if (n != null) tTarget = n; mode = 'glide'; }
+  });
+
+  // ---------- night sky ----------
+  function drawSky(){
+    const c = $('sky'), ctx = c.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1);
+    const s = c.clientWidth; c.width = c.height = s * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, s, s);
+    const gold = getComputedStyle(document.documentElement).getPropertyValue('--night-gold').trim() || '#CDAA63';
+    const g = ctx.createRadialGradient(s*.5, s*.46, s*.05, s*.5, s*.46, s*.36);
+    g.addColorStop(0, 'rgba(232,229,220,.20)'); g.addColorStop(.7, 'rgba(232,229,220,.07)'); g.addColorStop(1, 'rgba(232,229,220,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s*.5, s*.46, s*.36, 0, Math.PI*2); ctx.fill();
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < 140; i++){ ctx.fillStyle = `rgba(232,229,220,${.15 + rnd() * .45})`; ctx.beginPath(); ctx.arc(rnd()*s, rnd()*s*.92, rnd()*1.1 + .2, 0, Math.PI*2); ctx.fill(); }
+    const st = [[.38,.20],[.47,.40],[.54,.53],[.70,.62],[.46,.74]].map(([x,y]) => [x*s, y*s]);
+    ctx.strokeStyle = gold; ctx.lineWidth = 1; ctx.globalAlpha = .8;
+    ctx.beginPath(); ctx.moveTo(...st[0]); ctx.lineTo(...st[1]); ctx.lineTo(...st[2]); ctx.lineTo(...st[3]); ctx.moveTo(...st[2]); ctx.lineTo(...st[4]); ctx.stroke(); ctx.globalAlpha = 1;
+    st.forEach(([x,y], i) => { const r = i === 2 ? 4.2 : 3; ctx.fillStyle = '#F3EFE3'; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = gold; ctx.globalAlpha = .5; ctx.beginPath(); ctx.arc(x, y, r + 5, 0, Math.PI*2); ctx.stroke(); ctx.globalAlpha = 1; });
+  }
+
+  // ---------- reveals, copy, nav ----------
+  function reveals(){
+    if (reduce || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top > innerHeight){ el.classList.add('pre'); io.observe(el); } });
+  }
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const el = $(b.dataset.copy), txt = el.textContent.trim();
+    const done = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1600); };
+    const pick = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Seleccionado'; setTimeout(() => b.textContent = 'Copiar', 1600); };
+    try { navigator.clipboard.writeText(txt).then(done, pick); } catch (e) { pick(); }
+  }));
+  // "La torre" jumps straight to the explorer at the end of the arrival
+  $('navTorre').addEventListener('click', e => { e.preventDefault(); const span = sec.offsetHeight - innerHeight; scrollTo(0, sec.offsetTop + span * ((TOTAL - SEG[SEG.length-1].len * .5) / TOTAL)); });
+
+  addEventListener('resize', () => { layout(); drawSky(); onScroll(); });
+  addEventListener('scroll', onScroll, {passive:true});
+  layout(); onScroll(); drawSky(); reveals();
+  $('poster').src = M + 'vuelo-inicio.jpg';
+  requestAnimationFrame(frame);
+  boot();
+})();
+</script>
