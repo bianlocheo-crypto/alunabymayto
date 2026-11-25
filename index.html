@@ -133,7 +133,7 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 
 /* explorer layer (lives on the same stage, active at the end of the arrival) */
 .explore{position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0; transition:opacity .6s;
-  background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.25) 22%, rgba(10,18,28,0) 34%)}
+  background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.38) 14%, rgba(10,18,28,.2) 27%, rgba(10,18,28,.08) 40%, rgba(10,18,28,.02) 50%, rgba(10,18,28,0) 58%)}
 .explore.on{opacity:1}
 .explore.on .floors, .explore.on .index, .explore.on .dn{pointer-events:auto}
 .explore .dn{z-index:2}   /* above the full-screen floor hit areas */
@@ -775,8 +775,13 @@ footer .logo{width:110px; color:var(--mute)}
     const l = byId(hot), [x, y0] = toScreen(TOWER_BOX.x1, l.y[0]), [, y1] = toScreen(TOWER_BOX.x1, l.y[1]);
     const tw = tip.offsetWidth, th = tip.offsetHeight, room = W - x - 24;
     let left = room > tw ? x + 18 : toScreen(TOWER_BOX.x0, 0)[0] - tw - 18;
-    if (left < 12) left = clamp(W / 2 - tw / 2, 12, W - tw - 12);
-    const top = clamp((y0 + y1) / 2 - th / 2, 70, H - th - 12);
+    let top = clamp((y0 + y1) / 2 - th / 2, 70, H - th - 12);
+    if (left < 12){   // no room beside the tower (phones): below its base, or above its crown — never over it
+      left = clamp(W / 2 - tw / 2, 12, W - tw - 12);
+      const dn = document.querySelector('.dn'), dnTop = dn && dn.offsetParent ? dn.getBoundingClientRect().top : H;
+      const base = toScreen(TOWER_BOX.x0, GEO.y.pb[1])[1] + 14, crown = toScreen(TOWER_BOX.x0, GEO.y.n6[0])[1] - th - 14;
+      top = base + th <= Math.min(H, dnTop) - 10 ? base : Math.max(70, crown);
+    }
     tip.style.transform = `translate(${left}px, ${top}px)`;
   }
   floors.addEventListener('pointerover', e => { const id = e.target.dataset && e.target.dataset.id; if (id) setHot(id); });
