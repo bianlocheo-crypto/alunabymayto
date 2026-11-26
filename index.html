@@ -405,9 +405,9 @@ footer .logo{width:110px; color:var(--mute)}
         <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
       </div>
       <div class="gallery">
-        <figure class="g-pista rv"><img src="media-r13/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
-        <figure class="g-cenital rv"><img src="media-r13/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
-        <figure class="g-noche rv"><img src="media-r13/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <figure class="g-pista rv"><img src="media-r14/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r14/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r14/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
         <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
       </div>
     </div>
@@ -440,10 +440,10 @@ footer .logo{width:110px; color:var(--mute)}
         <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
       </div>
       <div class="duo">
-        <figure class="a rv"><img src="media-r13/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
-        <figure class="b rv"><img src="media-r13/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+        <figure class="a rv"><img src="media-r14/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r14/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
       </div>
-      <div class="exterior rv"><img src="media-r13/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+      <div class="exterior rv"><img src="media-r14/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
     </div>
   </section>
 
@@ -523,9 +523,9 @@ footer .logo{width:110px; color:var(--mute)}
 
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  const M = PHONE ? 'media-r13/v/' : 'media-r13/hd/';
-  const MF = 'media-r13/hd/';   // opening films + tower stills: the widescreen set on every screen (phones crop the centre; no phone-only films)
-  const MT = 'media-r13/hd/';   // tours: the widescreen clips on every screen (letterboxed on phones)
+  const M = PHONE ? 'media-r14/v/' : 'media-r14/hd/';
+  const MF = 'media-r14/hd/';   // opening films + tower stills: the widescreen set on every screen (phones crop the centre; no phone-only films)
+  const MT = 'media-r14/hd/';   // tours: the widescreen clips on every screen (letterboxed on phones)
   if (PHONE) document.documentElement.classList.add('phone');
   const VW = 1920, VH = 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
@@ -535,10 +535,10 @@ footer .logo{width:110px; color:var(--mute)}
     logoW:.62, site:{x:.69, y:.55},
     y:{n6:[.276,.331], n5:[.331,.375], n4:[.375,.419], n3:[.419,.464], n2:[.464,.505], n1:[.505,.547], pb:[.547,.594]}
   } : {
-    tower:{x0:.449, x1:.553},
+    tower:{x0:.417, x1:.591},
     hole:[{t:0, x:.490, y:.790, s:1, o:1}, {t:1, x:.500, y:.785, s:1.08, o:1}, {t:1.5, x:.510, y:.780, s:1.2, o:1}, {t:2, x:.530, y:.770, s:1.45, o:.85}, {t:2.5, x:.560, y:.760, s:2, o:.4}, {t:2.9, x:.590, y:.760, s:2.8, o:0}],
     logoW:.25, site:{x:.618, y:.601},
-    y:{n6:[.258,.307], n5:[.307,.344], n4:[.344,.380], n3:[.380,.416], n2:[.416,.452], n1:[.452,.488], pb:[.488,.535]}
+    y:{n6:[.120,.190], n5:[.190,.255], n4:[.255,.324], n3:[.324,.389], n2:[.389,.454], n1:[.454,.519], pb:[.519,.593]}
   };
   const TOWER_BOX = GEO.tower;
 
@@ -565,9 +565,8 @@ footer .logo{width:110px; color:var(--mute)}
   };
   // Each tour is a chain of clips; clip i starts where clip i-1 ends, so together they play as one walk.
   const TOURS = {
-    tipo: {img:'maqueta-tipo', night:true, stops:[{t:'Llegada · elevadores', v:'tipo-1'}, {t:'Cocina y comedor', v:'tipo-2'}, {t:'Estancia', v:'tipo-3'}, {t:'Recámara principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
-    ph:   {img:'maqueta-ph',   night:true, stops:[{t:'Llegada · elevadores', v:'ph-1'}, {t:'Estancia frente al mar', v:'ph-2'}, {t:'Cocina y comedor', v:'ph-3'}, {t:'Suite principal', v:'ph-4'}]},
-    pb:   {img:'maqueta-pb',   night:true, stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
+    tipo: {img:'tour-tipo-0', start:'Cocina', night:true, stops:[{t:'Estancia', v:'tipo-1'}, {t:'Sala frente al mar', v:'tipo-2'}, {t:'Recámara principal', v:'tipo-3'}, {t:'Recámara · vista a la montaña', v:'tipo-4'}, {t:'Comedor', v:'tipo-5'}, {t:'Cocina y elevador', v:'tipo-6'}]},
+    pb:   {img:'tour-pb-0',   start:'Restaurante', night:true, stops:[{t:'Bajo la cúpula', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'La torre', v:'pb-3'}]},
     roof: {img:'maqueta-n6',   night:true, stops:[{t:'Jacuzzi al atardecer', tn:'Jacuzzi bajo las estrellas', v:'rooftop-1'}, {t:'Terraza y comedor', v:'rooftop-2'}, {t:'Gimnasio', v:'rooftop-3'}]}
   };
 
@@ -612,7 +611,7 @@ footer .logo{width:110px; color:var(--mute)}
   }
 
   // ---------- logo ----------
-  const logoReady = fetch('media-r13/aluna-logo.svg').then(r => r.text()).then(svg => {
+  const logoReady = fetch('media-r14/aluna-logo.svg').then(r => r.text()).then(svg => {
     svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
              .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
     document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
@@ -812,7 +811,7 @@ footer .logo{width:110px; color:var(--mute)}
   function openLevel(id){
     const l = byId(id); current = l;
     $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
-    const img = $('planImg'); img.src = `media-r13/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const img = $('planImg'); img.src = `media-r14/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
     const svg = $('planSvg'); svg.innerHTML = '';
     const list = $('unitList'); list.innerHTML = '';
     $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
@@ -830,7 +829,7 @@ footer .logo{width:110px; color:var(--mute)}
       card.innerHTML = `<div class="head"><h3>${unitTitle(l, u)}</h3>${owned ? `<span class="status${u.sold ? ' sold' : ''}">${u.sold ? 'Vendida' : 'Disponible'}</span>` : `<span class="tagline">${k.kind}</span>`}</div>
         <dl><div><dt>Superficie</dt><dd>${k.area}</dd></div><div><dt>${u.k === 'res' || u.k === 'ph' ? 'Recámaras' : 'Incluye'}</dt><dd>${k.a}</dd></div><div><dt>${u.k === 'res' || u.k === 'ph' ? 'Baños' : 'Además'}</dt><dd>${k.b}</dd></div></dl>
         ${u.sold ? `<span class="note">Esta residencia ya fue vendida. Puedes ver su recorrido: la residencia tipo es igual en los niveles 1 a 4.</span>` : k.price ? `<span class="note">${k.price}</span>` : ''}
-        <div class="acts"><button class="btn-g" type="button" data-tour="${i}">Recorrido 3D</button>${owned && !u.sold ? `<a class="btn-o" target="_blank" rel="noopener" href="https://wa.me/523346380903?text=${encodeURIComponent('Hola, me interesa ' + unitTitle(l, u) + ' (' + l.name + ') de Aluna Residences en Mayto.')}">Pedir disponibilidad</a>` : ''}</div>`;
+        <div class="acts">${TOURS[k.tour] ? `<button class="btn-g" type="button" data-tour="${i}">Recorrido 3D</button>` : ''}${owned && !u.sold ? `<a class="btn-o" target="_blank" rel="noopener" href="https://wa.me/523346380903?text=${encodeURIComponent('Hola, me interesa ' + unitTitle(l, u) + ' (' + l.name + ') de Aluna Residences en Mayto.')}">Pedir disponibilidad</a>` : ''}</div>`;
       list.appendChild(card);
     });
     const nav = $('lvlNav'); nav.innerHTML = '';
@@ -855,12 +854,13 @@ footer .logo{width:110px; color:var(--mute)}
   const keypoints = () => Array.from({length:T.stops.length + 1}, (_, i) => i * CLIP);
   const tTotal = () => T.stops.length * CLIP;
   function openTour(i){
+    if (!TOURS[KINDS[current.units[i].k].tour]) return;      // units without a walkthrough (penthouse) open no tour
     const l = current, u = l.units[i], k = KINDS[u.k]; T = TOURS[k.tour]; tKey = k.tour;
     $('tEyebrow').textContent = `${l.name} · Recorrido 3D`; $('tTitle').textContent = unitTitle(l, u);
     screen.classList.toggle('mirror', u.tag === 'B');      // unit B is the mirror image of unit A on every typical level
     tm.innerHTML = ''; tOn = -1;
     TV = T.stops.map((s, j) => { const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
-      if (j === 0) v.poster = MT + T.img + '.jpg';
+      if (j === 0) v.poster = MT + T.img + (T.night && stage.classList.contains('night') ? '-n' : '') + '.jpg';
       v.addEventListener('seeked', () => { tSeek[j] = false; });
       tm.appendChild(v); return v; });
     tLoaded = TV.map(() => false); tSeek = TV.map(() => false);
@@ -870,7 +870,7 @@ footer .logo{width:110px; color:var(--mute)}
     keypoints().forEach((p, j) => { const s = document.createElement('span'); s.style.left = (p / tTotal() * 100) + '%'; track.appendChild(s); });
     const stops = $('stops'); stops.innerHTML = '';
     const mk = (label, j) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.addEventListener('click', () => { stopAuto(); tTarget = keypoints()[j]; mode = 'glide'; }); stops.appendChild(b); };
-    mk('Maqueta 3D', 0); T.stops.forEach((s, j) => mk(s.t, j + 1));
+    mk(T.start || 'Inicio', 0); T.stops.forEach((s, j) => mk(s.t, j + 1));
     const p = document.createElement('button'); p.type = 'button'; p.className = 'play'; p.textContent = 'Recorrido completo';
     p.addEventListener('click', () => { tShown = tTarget = 0; startAuto(T.stops.length); }); stops.appendChild(p);
     tShown = tTarget = 0; swipeHint.classList.add('on');
@@ -933,7 +933,7 @@ footer .logo{width:110px; color:var(--mute)}
     // caption: the nearest keypoint
     const kp = Math.round(tShown / CLIP);
     $('tStopNo').textContent = kp === 0 ? 'Vista general' : `Parada ${kp} de ${n}`;
-    $('tStop').textContent = kp === 0 ? 'Maqueta 3D' : stopName(T.stops[kp - 1]);
+    $('tStop').textContent = kp === 0 ? (T.start || 'Inicio') : stopName(T.stops[kp - 1]);
     $('stops').querySelectorAll('button:not(.play)').forEach((b, x) => b.setAttribute('aria-current', x === kp));
     trackFill.style.transform = `scaleX(${tShown / total})`;
   }
