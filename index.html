@@ -222,6 +222,7 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 .screen .m{position:absolute; inset:0; transition:transform .3s}
 .screen.mirror .m{transform:scaleX(-1)}
 .screen video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.phone .screen{background:#07090c} .phone .screen video{object-fit:contain}   /* phones play the widescreen tours whole */
 .screen .cap{position:absolute; left:var(--gut); bottom:calc(env(safe-area-inset-bottom,0px) + 92px); z-index:2; display:grid; gap:6px; text-shadow:0 1px 12px rgba(0,0,0,.6)}
 .screen .cap .label{color:var(--night-gold)}
 .screen .cap b{font:400 clamp(24px,3vw,40px)/1.1 var(--f-display); color:#fff}
@@ -523,9 +524,12 @@ footer .logo{width:110px; color:var(--mute)}
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
   const M = PHONE ? 'media-r5/v/' : 'media-r5/hd/';
-  const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
+  const MF = 'media-r5/hd/';   // opening films + tower stills: the widescreen set on every screen (phones crop the centre; no phone-only films)
+  const MT = 'media-r5/hd/';   // tours: the widescreen clips on every screen (letterboxed on phones)
+  if (PHONE) document.documentElement.classList.add('phone');
+  const VW = 1920, VH = 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
-  const GEO = PHONE ? {
+  const GEO = false ? {
     tower:{x0:.325, x1:.694},
     hole:[{t:0, x:.48, y:.72, s:1, o:1}, {t:1, x:.49, y:.71, s:1.08, o:1}, {t:1.6, x:.50, y:.70, s:1.3, o:.9}, {t:2.2, x:.50, y:.69, s:1.8, o:.4}, {t:2.6, x:.50, y:.68, s:2.4, o:0}],
     logoW:.62, site:{x:.69, y:.55},
@@ -643,14 +647,14 @@ footer .logo{width:110px; color:var(--mute)}
   }
   async function boot(){
     await logoReady;
-    try { await attach('A', await fetchBlob(M + FILMS.A, p => setProg(Math.min(.98, p)))); } catch (e) {}
+    try { await attach('A', await fetchBlob(MF + FILMS.A, p => setProg(Math.min(.98, p)))); } catch (e) {}
     setProg(1);
     setTimeout(() => $('loader').classList.add('done'), 300);
     for (const k of BUILD){
-      try { await attach(k, await fetchBlob(M + FILMS[k], p => { got[k] = p; if (held === k) showWait(); })); }
+      try { await attach(k, await fetchBlob(MF + FILMS[k], p => { got[k] = p; if (held === k) showWait(); })); }
       catch (e) { failed[k] = true; release(k); } }
     // the explorer stills come last
-    $('dayImg').src = M + 'torre-dia.jpg'; $('nightImg').src = M + 'torre-noche.jpg';
+    $('dayImg').src = MF + 'torre-dia.jpg'; $('nightImg').src = MF + 'torre-noche.jpg';
   }
 
   // ---------- scroll → (film, time, overlays) ----------
@@ -856,7 +860,7 @@ footer .logo{width:110px; color:var(--mute)}
     screen.classList.toggle('mirror', u.tag === 'B');      // unit B is the mirror image of unit A on every typical level
     tm.innerHTML = ''; tOn = -1;
     TV = T.stops.map((s, j) => { const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
-      if (j === 0) v.poster = M + T.img + '.jpg';
+      if (j === 0) v.poster = MT + T.img + '.jpg';
       v.addEventListener('seeked', () => { tSeek[j] = false; });
       tm.appendChild(v); return v; });
     tLoaded = TV.map(() => false); tSeek = TV.map(() => false);
@@ -891,7 +895,7 @@ footer .logo{width:110px; color:var(--mute)}
       for (let n = 0; n < order.length; n++){
         const j = order[n];
         tLoad.textContent = `${night ? 'Noche' : 'Día'} · cargando ${Math.round(n / order.length * 100)} %`; tLoad.hidden = false;
-        try { const url = await fetchBlob(M + T.stops[j].v + (night ? '-n' : '') + '.mp4'); if (token !== tToken) return;
+        try { const url = await fetchBlob(MT + T.stops[j].v + (night ? '-n' : '') + '.mp4'); if (token !== tToken) return;
               TV[j].src = url; TV[j].load();
               await new Promise(r => { TV[j].addEventListener('loadeddata', r, {once:true}); TV[j].addEventListener('error', r, {once:true}); });
               if (token !== tToken) return;
@@ -1006,7 +1010,7 @@ footer .logo{width:110px; color:var(--mute)}
   addEventListener('resize', () => { layout(); drawSky(); onScroll(); });
   addEventListener('scroll', onScroll, {passive:true});
   layout(); onScroll(); drawSky(); reveals();
-  $('poster').src = M + 'vuelo-inicio.jpg';
+  $('poster').src = MF + 'vuelo-inicio.jpg';
   requestAnimationFrame(frame);
   boot();
 })();
