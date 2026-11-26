@@ -46,7 +46,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none !important}
 body{background:var(--moon); color:var(--ink); font:300 17px/1.65 var(--f-body); -webkit-font-smoothing:antialiased; overflow-x:hidden}
-body.locked{overflow:hidden}
+body.locked{overscroll-behavior:none}   /* no overflow:hidden: it unpins the sticky stage (white / wrong frame on return) */
 img{max-width:100%; display:block}
 h1,h2,h3{font-family:var(--f-display); font-weight:400; text-wrap:balance; margin:0; line-height:1.08; letter-spacing:.005em}
 p{margin:0}
@@ -793,12 +793,16 @@ footer .logo{width:110px; color:var(--mute)}
   // ---------- level panel ----------
   const panel = $('panel'), tour = $('tour');
   let current = null, lastFocus = null;
-  function openOverlay(el){ lastFocus = lastFocus || document.activeElement; el.classList.add('on'); document.body.classList.add('locked'); setTimeout(() => el.querySelector('.x').focus(), 50); }
+  let lockY = null;                       // page scroll position saved while a panel or tour is open
+  const lockBlock = e => { if (lockY !== null && !e.target.closest('#panel, #tour')) e.preventDefault(); };
+  addEventListener('wheel', lockBlock, {passive:false}); addEventListener('touchmove', lockBlock, {passive:false});
+  addEventListener('scroll', () => { if (lockY !== null && Math.abs(scrollY - lockY) > 1) scrollTo(0, lockY); });
+  function openOverlay(el){ lastFocus = lastFocus || document.activeElement; if (lockY === null) lockY = scrollY; el.classList.add('on'); document.body.classList.add('locked'); setTimeout(() => el.querySelector('.x').focus({preventScroll:true}), 50); }
   function closeOverlay(el){
     el.classList.remove('on');
     if (el === tour){ tToken++; TV.forEach(v => v.pause()); mode = 'idle'; }
-    if (!panel.classList.contains('on') && !tour.classList.contains('on')){ document.body.classList.remove('locked'); if (lastFocus) lastFocus.focus(); lastFocus = null; }
-    else if (el === tour) panel.querySelector('.x').focus();
+    if (!panel.classList.contains('on') && !tour.classList.contains('on')){ document.body.classList.remove('locked'); const y = lockY; lockY = null; if (y !== null) scrollTo(0, y); if (lastFocus) lastFocus.focus({preventScroll:true}); lastFocus = null; dirty = true; }
+    else if (el === tour) panel.querySelector('.x').focus({preventScroll:true});
   }
   document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeOverlay($(b.dataset.close))));
   addEventListener('keydown', e => { if (e.key === 'Escape'){ if (tour.classList.contains('on')) closeOverlay(tour); else if (panel.classList.contains('on')) closeOverlay(panel); } });
