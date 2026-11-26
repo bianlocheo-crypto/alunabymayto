@@ -5,7 +5,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aluna Residences · Mayto">
 <meta property="og:description" content="Diez residencias frente al mar en la playa virgen de Mayto, Jalisco. Explora la torre piso por piso y recorre cada residencia en 3D.">
-<meta property="og:image" content="https://alunabymayto.vercel.app/og-r12.jpg">
+<meta property="og:image" content="https://alunabymayto.vercel.app/og-r5.jpg">
 <meta property="og:url" content="https://alunabymayto.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -133,7 +133,7 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 
 /* explorer layer (lives on the same stage, active at the end of the arrival) */
 .explore{position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0; transition:opacity .6s;
-  background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.38) 14%, rgba(10,18,28,.2) 27%, rgba(10,18,28,.08) 40%, rgba(10,18,28,.02) 50%, rgba(10,18,28,0) 58%)}
+  background:linear-gradient(90deg, rgba(10,18,28,.55) 0%, rgba(10,18,28,.25) 22%, rgba(10,18,28,0) 34%)}
 .explore.on{opacity:1}
 .explore.on .floors, .explore.on .index, .explore.on .dn{pointer-events:auto}
 .explore .dn{z-index:2}   /* above the full-screen floor hit areas */
@@ -404,9 +404,9 @@ footer .logo{width:110px; color:var(--mute)}
         <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
       </div>
       <div class="gallery">
-        <figure class="g-pista rv"><img src="media-r12/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
-        <figure class="g-cenital rv"><img src="media-r12/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
-        <figure class="g-noche rv"><img src="media-r12/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <figure class="g-pista rv"><img src="media-r5/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r5/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r5/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
         <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
       </div>
     </div>
@@ -439,10 +439,10 @@ footer .logo{width:110px; color:var(--mute)}
         <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
       </div>
       <div class="duo">
-        <figure class="a rv"><img src="media-r12/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
-        <figure class="b rv"><img src="media-r12/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+        <figure class="a rv"><img src="media-r5/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r5/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
       </div>
-      <div class="exterior rv"><img src="media-r12/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+      <div class="exterior rv"><img src="media-r5/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
     </div>
   </section>
 
@@ -522,19 +522,19 @@ footer .logo{width:110px; color:var(--mute)}
 
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  const M = PHONE ? 'media-r12/v/' : 'media-r12/hd/';
+  const M = PHONE ? 'media-r5/v/' : 'media-r5/hd/';
   const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
   const GEO = PHONE ? {
-    tower:{x0:.384, x1:.621},
+    tower:{x0:.325, x1:.694},
     hole:[{t:0, x:.48, y:.72, s:1, o:1}, {t:1, x:.49, y:.71, s:1.08, o:1}, {t:1.6, x:.50, y:.70, s:1.3, o:.9}, {t:2.2, x:.50, y:.69, s:1.8, o:.4}, {t:2.6, x:.50, y:.68, s:2.4, o:0}],
-    logoW:.62, site:{x:.728, y:.591},
-    y:{n6:[.303,.338], n5:[.338,.364], n4:[.364,.390], n3:[.390,.416], n2:[.416,.442], n1:[.442,.467], pb:[.467,.501]}
+    logoW:.62, site:{x:.69, y:.55},
+    y:{n6:[.276,.331], n5:[.331,.375], n4:[.375,.419], n3:[.419,.464], n2:[.464,.505], n1:[.505,.547], pb:[.547,.594]}
   } : {
-    tower:{x0:.449, x1:.553},
+    tower:{x0:.417, x1:.591},
     hole:[{t:0, x:.490, y:.790, s:1, o:1}, {t:1, x:.500, y:.785, s:1.08, o:1}, {t:1.5, x:.510, y:.780, s:1.2, o:1}, {t:2, x:.530, y:.770, s:1.45, o:.85}, {t:2.5, x:.560, y:.760, s:2, o:.4}, {t:2.9, x:.590, y:.760, s:2.8, o:0}],
     logoW:.25, site:{x:.618, y:.601},
-    y:{n6:[.258,.307], n5:[.307,.344], n4:[.344,.380], n3:[.380,.416], n2:[.416,.452], n1:[.452,.488], pb:[.488,.535]}
+    y:{n6:[.120,.190], n5:[.190,.255], n4:[.255,.324], n3:[.324,.389], n2:[.389,.454], n1:[.454,.519], pb:[.519,.593]}
   };
   const TOWER_BOX = GEO.tower;
 
@@ -561,9 +561,8 @@ footer .logo{width:110px; color:var(--mute)}
   };
   // Each tour is a chain of clips; clip i starts where clip i-1 ends, so together they play as one walk.
   const TOURS = {
-    // tipo and ph are one continuous Blender walk each, modelled from Nivel_03 / Nivel_05 (clip i ends at stop i)
-    tipo: {img:'maqueta-tipo', night:true, stops:[{t:'Llegada · elevador privado', v:'tipo-1'}, {t:'Recámara · vista a la montaña', v:'tipo-2'}, {t:'Cocina y comedor', v:'tipo-3'}, {t:'Recámara principal · vista al mar', v:'tipo-4'}, {t:'Estancia', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
-    ph:   {img:'maqueta-ph',   night:true, stops:[{t:'Llegada · elevador privado', v:'ph-1'}, {t:'Estancia frente al mar', v:'ph-2'}, {t:'Cocina y comedor', v:'ph-3'}, {t:'Suite principal', v:'ph-4'}]},
+    tipo: {img:'maqueta-tipo', night:true, stops:[{t:'Llegada · elevadores', v:'tipo-1'}, {t:'Cocina y comedor', v:'tipo-2'}, {t:'Estancia', v:'tipo-3'}, {t:'Recámara principal', v:'tipo-4'}, {t:'Segunda recámara', v:'tipo-5'}, {t:'Terraza al mar', v:'tipo-6'}]},
+    ph:   {img:'maqueta-ph',   night:true, stops:[{t:'Llegada · elevadores', v:'ph-1'}, {t:'Estancia frente al mar', v:'ph-2'}, {t:'Cocina y comedor', v:'ph-3'}, {t:'Suite principal', v:'ph-4'}]},
     pb:   {img:'maqueta-pb',   night:true, stops:[{t:'Restaurante', v:'pb-1'}, {t:'Alberca', v:'pb-2'}, {t:'Acceso a la playa', v:'pb-3'}]},
     roof: {img:'maqueta-n6',   night:true, stops:[{t:'Jacuzzi al atardecer', tn:'Jacuzzi bajo las estrellas', v:'rooftop-1'}, {t:'Terraza y comedor', v:'rooftop-2'}, {t:'Gimnasio', v:'rooftop-3'}]}
   };
@@ -609,7 +608,7 @@ footer .logo{width:110px; color:var(--mute)}
   }
 
   // ---------- logo ----------
-  const logoReady = fetch('media-r12/aluna-logo.svg').then(r => r.text()).then(svg => {
+  const logoReady = fetch('media-r5/aluna-logo.svg').then(r => r.text()).then(svg => {
     svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
              .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
     document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
@@ -775,13 +774,8 @@ footer .logo{width:110px; color:var(--mute)}
     const l = byId(hot), [x, y0] = toScreen(TOWER_BOX.x1, l.y[0]), [, y1] = toScreen(TOWER_BOX.x1, l.y[1]);
     const tw = tip.offsetWidth, th = tip.offsetHeight, room = W - x - 24;
     let left = room > tw ? x + 18 : toScreen(TOWER_BOX.x0, 0)[0] - tw - 18;
-    let top = clamp((y0 + y1) / 2 - th / 2, 70, H - th - 12);
-    if (left < 12){   // no room beside the tower (phones): below its base, or above its crown — never over it
-      left = clamp(W / 2 - tw / 2, 12, W - tw - 12);
-      const dn = document.querySelector('.dn'), dnTop = dn && dn.offsetParent ? dn.getBoundingClientRect().top : H;
-      const base = toScreen(TOWER_BOX.x0, GEO.y.pb[1])[1] + 14, crown = toScreen(TOWER_BOX.x0, GEO.y.n6[0])[1] - th - 14;
-      top = base + th <= Math.min(H, dnTop) - 10 ? base : Math.max(70, crown);
-    }
+    if (left < 12) left = clamp(W / 2 - tw / 2, 12, W - tw - 12);
+    const top = clamp((y0 + y1) / 2 - th / 2, 70, H - th - 12);
     tip.style.transform = `translate(${left}px, ${top}px)`;
   }
   floors.addEventListener('pointerover', e => { const id = e.target.dataset && e.target.dataset.id; if (id) setHot(id); });
@@ -814,7 +808,7 @@ footer .logo{width:110px; color:var(--mute)}
   function openLevel(id){
     const l = byId(id); current = l;
     $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
-    const img = $('planImg'); img.src = `media-r12/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const img = $('planImg'); img.src = `media-r5/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
     const svg = $('planSvg'); svg.innerHTML = '';
     const list = $('unitList'); list.innerHTML = '';
     $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
