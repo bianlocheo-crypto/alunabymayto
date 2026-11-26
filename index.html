@@ -5,7 +5,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aluna Residences · Mayto">
 <meta property="og:description" content="Diez residencias frente al mar en la playa virgen de Mayto, Jalisco. Explora la torre piso por piso y recorre cada residencia en 3D.">
-<meta property="og:image" content="https://alunabymayto.vercel.app/og-r7.jpg">
+<meta property="og:image" content="https://alunabymayto.vercel.app/og-r8.jpg">
 <meta property="og:url" content="https://alunabymayto.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -404,9 +404,9 @@ footer .logo{width:110px; color:var(--mute)}
         <div class="fact"><div class="n">12</div><p>templos del zodiaco en el master plan. Aluna es Cáncer.</p></div>
       </div>
       <div class="gallery">
-        <figure class="g-pista rv"><img src="media-r7/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
-        <figure class="g-cenital rv"><img src="media-r7/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
-        <figure class="g-noche rv"><img src="media-r7/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
+        <figure class="g-pista rv"><img src="media-r8/mayto-pista.jpg" alt="Vista aérea de la pista de Mayto junto a la playa y el mar" loading="lazy"><figcaption>La pista y la playa de Mayto</figcaption></figure>
+        <figure class="g-cenital rv"><img src="media-r8/mayto-cenital.jpg" alt="Vista cenital de la playa de Mayto con el hotel y la alberca" loading="lazy"><figcaption>Del mar a la pista, en vista cenital</figcaption></figure>
+        <figure class="g-noche rv"><img src="media-r8/mayto-noche.jpg" alt="Vía Láctea sobre el cerro y la playa de Mayto" loading="lazy"><figcaption>Cielo oscuro sobre Cabo Corrientes</figcaption></figure>
         <div class="g-text rv"><h3>Lejos de las luces de la ciudad, el cielo se ve completo.</h3><p>En Mayto ya operan un hotel boutique de doce villas, el beach club, el restaurante Tatē del chef Paco Ruano y un gimnasio frente al mar. Aluna suma la primera torre residencial del conjunto.</p></div>
       </div>
     </div>
@@ -439,10 +439,10 @@ footer .logo{width:110px; color:var(--mute)}
         <p class="rv">En planta baja, un lobby con restaurante integrado se abre a la alberca y a la playa. Arriba, dos residencias por nivel con estancia, comedor y cocina hacia el mar, y en el último nivel un rooftop con gimnasio, cocina para eventos y jacuzzi al atardecer.</p>
       </div>
       <div class="duo">
-        <figure class="a rv"><img src="media-r7/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
-        <figure class="b rv"><img src="media-r7/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
+        <figure class="a rv"><img src="media-r8/aluna-alberca.jpg" alt="Render del restaurante de planta baja y la alberca frente al mar" loading="lazy"><div class="spec"><b>Lobby con restaurante</b><span>445.19 m² · Planta baja</span></div></figure>
+        <figure class="b rv"><img src="media-r8/aluna-estancia.jpg" alt="Render de la estancia de una residencia con vista al mar" loading="lazy"><div class="spec"><b>Residencia tipo</b><span>209 m² · 2 recámaras</span></div></figure>
       </div>
-      <div class="exterior rv"><img src="media-r7/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
+      <div class="exterior rv"><img src="media-r8/aluna-exterior.jpg" alt="Render exterior de la torre Aluna con su alberca, rodeada de palmeras" loading="lazy"><blockquote>Más espacio. Más horizonte. Más silencio.</blockquote></div>
     </div>
   </section>
 
@@ -522,7 +522,7 @@ footer .logo{width:110px; color:var(--mute)}
 
   // ---------- which media: tall screens get the vertical films, wide screens the widescreen ones ----------
   const PHONE = matchMedia('(max-aspect-ratio: 4/5)').matches;
-  const M = PHONE ? 'media-r7/v/' : 'media-r7/hd/';
+  const M = PHONE ? 'media-r8/v/' : 'media-r8/hd/';
   const VW = PHONE ? 1072 : 1920, VH = PHONE ? 1920 : 1072;        // frame size of every film in that set
   // Positions measured on each set's frames (x, y as a share of the frame).
   const GEO = PHONE ? {
@@ -609,7 +609,7 @@ footer .logo{width:110px; color:var(--mute)}
   }
 
   // ---------- logo ----------
-  const logoReady = fetch('media-r7/aluna-logo.svg').then(r => r.text()).then(svg => {
+  const logoReady = fetch('media-r8/aluna-logo.svg').then(r => r.text()).then(svg => {
     svg = svg.replace(/<svg([^>]*)\swidth="[^"]*"/, '<svg$1').replace(/<svg([^>]*)\sheight="[^"]*"/, '<svg$1')
              .replace('<svg', '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet"');
     document.querySelectorAll('[data-logo]').forEach(el => el.innerHTML = svg);
@@ -814,7 +814,7 @@ footer .logo{width:110px; color:var(--mute)}
   function openLevel(id){
     const l = byId(id); current = l;
     $('pEyebrow').textContent = l.name; $('pTitle').textContent = l.title; $('pLede').textContent = l.lede;
-    const img = $('planImg'); img.src = `media-r7/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
+    const img = $('planImg'); img.src = `media-r8/planos/nivel-${l.plan}.jpg`; img.alt = `Plano del ${l.name}: ${l.title}`;
     const svg = $('planSvg'); svg.innerHTML = '';
     const list = $('unitList'); list.innerHTML = '';
     $('plan').querySelectorAll('.soldtag').forEach(n => n.remove());
