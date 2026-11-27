@@ -121,6 +121,17 @@ header.solid{background:color-mix(in srgb, var(--moon) 88%, transparent); color:
 .card span.s{font:400 13px/1.45 var(--f-body)}
 .pin .card{position:absolute; bottom:calc(var(--stem,90px) + 14px); left:-1px; width:max-content; max-width:min(300px, 70vw)}
 .pin.on{opacity:1} .pin.on .stem{--grow:1}
+/* what is already open around the lot, shown with the Aluna pin on the landing frame */
+.pois{position:absolute; inset:0; z-index:3; pointer-events:none}
+.poi{position:absolute; left:0; top:0; opacity:0; transition:opacity .5s}
+.poi i{position:absolute; width:8px; height:8px; margin:-4px 0 0 -4px; border-radius:50%; background:#fff; box-shadow:0 0 0 4px rgba(255,255,255,.22), 0 1px 6px rgba(0,0,0,.4)}
+.poi s{position:absolute; left:0; bottom:6px; width:1px; height:var(--stem,50px); background:rgba(255,255,255,.75); transform-origin:bottom; transform:scaleY(0); transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.poi b{position:absolute; left:-1px; bottom:calc(var(--stem,50px) + 6px); white-space:nowrap; font:500 11px/1 var(--f-body); letter-spacing:.06em; color:#fff; background:rgba(13,20,29,.72); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); padding:6px 9px; border-left:1px solid var(--night-gold)}
+.pois.on .poi{opacity:1} .pois.on .poi s{transform:scaleY(1)}
+.pois.on .poi.off{opacity:0}
+.pois .away{position:absolute; transform:translateY(-50%); white-space:nowrap; font:500 11px/1 var(--f-body); letter-spacing:.06em; color:#fff; background:rgba(13,20,29,.72); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); padding:6px 9px; opacity:0; transition:opacity .5s}
+.pois .away.l{left:0; border-left:1px solid var(--night-gold)} .pois .away.r{right:0; border-right:1px solid var(--night-gold)}
+.pois.on .away{opacity:1}
 
 .chapter{position:absolute; z-index:4; left:var(--gut); right:var(--gut-r); bottom:calc(env(safe-area-inset-bottom,0px) + 40px); pointer-events:none}
 .chapter .inner{position:relative; min-height:150px}
@@ -371,6 +382,7 @@ footer .logo{width:110px; color:var(--mute)}
       <div class="intro" id="intro"><span class="label">Cabo Corrientes · Costalegre · Jalisco</span></div>
       <div class="hint" id="hint"><span class="label">Desliza para descender</span><i></i></div>
       <div class="wait" id="wait" aria-live="polite"><span class="label" id="waitTxt">Construyendo Aluna</span><i><b></b></i></div>
+      <div class="pois" id="pois" aria-label="Ya en Mayto"></div>
       <div class="pin" id="pin" aria-hidden="true">
         <div class="dot"></div><div class="stem"></div>
         <div class="card"><span class="label">El terreno</span><b>Aquí nacerá Aluna</b><span class="s">Templo de Cáncer · 7 niveles · 10 residencias</span></div>
@@ -537,7 +549,7 @@ footer .logo{width:110px; color:var(--mute)}
   } : {
     tower:{x0:.449, x1:.553},
     hole:[{t:0, x:.490, y:.790, s:1, o:1}, {t:1, x:.500, y:.785, s:1.08, o:1}, {t:1.5, x:.510, y:.780, s:1.2, o:1}, {t:2, x:.530, y:.770, s:1.45, o:.85}, {t:2.5, x:.560, y:.760, s:2, o:.4}, {t:2.9, x:.590, y:.760, s:2.8, o:0}],
-    logoW:.25, site:{x:.618, y:.601},
+    logoW:.25, site:{x:.643, y:.578},
     y:{n6:[.258,.307], n5:[.307,.344], n4:[.344,.380], n3:[.380,.416], n2:[.416,.452], n1:[.452,.488], pb:[.488,.535]}
   };
   const TOWER_BOX = GEO.tower;
@@ -601,7 +613,7 @@ footer .logo{width:110px; color:var(--mute)}
   function layout(){
     W = stage.clientWidth; H = stage.clientHeight;
     const s = Math.max(W / VW, H / VH);
-    box = {s, ox:(W - VW * s) / 2, oy:(H - VH * s) / 2};
+    box = {s, ox:(W - VW * s) / 2, oy:(H - VH * s) / 2, ox0:(W - VW * s) / 2};
     media.style.width = VW + 'px'; media.style.height = VH + 'px';
     media.style.transform = `translate3d(${box.ox}px, ${box.oy}px, 0) scale(${s})`;
     const f = $('floors');
@@ -693,6 +705,19 @@ footer .logo{width:110px; color:var(--mute)}
   const hole = $('hole'), pin = $('pin'), hint = $('hint'), intro = $('intro'), scrim = $('scrim'), poster = $('poster'), explore = $('explore');
   const chaps = [...document.querySelectorAll('.chap')];
   let lastChap = null, lastExplore = null, lastPin = null;
+  // what is already open around the lot (positions on the landing frame of vuelo.mp4; s = stem height, staggered so labels never overlap)
+  const POIS = [
+    {n:'Tacos Thacoalli', x:.344, y:.516, s:74},
+    {n:'MAJA Store',      x:.376, y:.535, s:30},
+    {n:'Hotel boutique',  x:.456, y:.474, s:112},
+    {n:'TATE Restaurant', x:.507, y:.472, s:72},
+    {n:'Olympo Wellness', x:.536, y:.475, s:32},
+    {n:'Mayto Airport',   x:.593, y:.796, s:46}
+  ];
+  const pois = $('pois');
+  const poiEls = POIS.map(p => { const d = document.createElement('div'); d.className = 'poi'; d.innerHTML = `<i></i><s></s><b>${p.n}</b>`; pois.appendChild(d); return d; });
+  const poiAway = {l:document.createElement('b'), r:document.createElement('b')};
+  poiAway.l.className = 'away l'; poiAway.r.className = 'away r'; poiAway.l.hidden = poiAway.r.hidden = true; pois.append(poiAway.l, poiAway.r);
   function frame(){
     requestAnimationFrame(frame);
     const moving = shown.v !== target.v || Math.abs(target.t - shown.t) > .0015;
@@ -700,6 +725,19 @@ footer .logo{width:110px; color:var(--mute)}
     dirty = false;
     if (shown.v !== target.v) shown = {v:target.v, t:target.t};
     else shown.t = Math.abs(target.t - shown.t) < .0015 ? target.t : lerp(shown.t, target.t, .22);
+
+    // narrow screens: the landing frame is wider than the phone, so the flight and the lot stop are framed a little to the
+    // right (the Aluna lot and the places around it fit), easing back to centre during the first half of the build
+    const wide = VW * box.s - W;
+    if (wide > 0){
+      const k = shown.v === 'A' ? 1 : shown.v === 'B1' ? 1 - smooth(clamp(shown.t / (END * .5), 0, 1)) : 0;
+      const ox = box.ox0 - Math.min(wide / 2, .05 * VW * box.s) * k;
+      if (Math.abs(ox - box.ox) > .25 || (k === 0 && ox !== box.ox)){
+        box.ox = ox;
+        media.style.transform = `translate3d(${ox}px, ${box.oy}px, 0) scale(${box.s})`;
+        $('floors').style.transform = `translate3d(${ox}px, ${box.oy}px, 0)`;
+      }
+    }
 
     // the film on screen: if the next film is still downloading, hold the last frame we have
     if (ready[shown.v] && onFilm !== shown.v){ vids[onFilm].classList.remove('on'); vids[shown.v].classList.add('on'); onFilm = shown.v; }
@@ -722,12 +760,38 @@ footer .logo{width:110px; color:var(--mute)}
     const seg = target.seg;
     const pinOn = !!seg.pin && shown.v === 'A' && Math.abs(shown.t - A_LAND) < .25;
     if (pinOn){
-      const [tx, ty] = toScreen(GEO.site.x, GEO.site.y), stem = Math.max(60, Math.min(120, H * .12));
-      pin.style.transform = `translate3d(${clamp(tx, 24, W - 24)}px, ${ty}px, 0)`; pin.style.setProperty('--stem', stem + 'px');
-      const card = pin.querySelector('.card'), room = W - tx - 16;
-      card.style.left = (card.offsetWidth > room ? -(card.offsetWidth - room) : -1) + 'px';
+      // the places already open: label to the right of its stem, flipped left near the right edge;
+      // places off the screen (narrow phones) are gathered into one tag on that edge
+      const k = clamp(H / 900, .75, 1.15), labs = [], away = {l:[], r:[], ly:0, ry:0};
+      const capEl = chaps.find(c => c.dataset.chap === seg.chap), sr = stage.getBoundingClientRect();
+      const cap = capEl ? capEl.getBoundingClientRect() : null, capTop = cap ? cap.top - sr.top - 14 : H;
+      const under = (x0, x1, y1) => cap && y1 > capTop && x1 > cap.left - sr.left - 10 && x0 < cap.right - sr.left + 10;
+      POIS.forEach((p, i) => {
+        const [px, py] = toScreen(p.x, p.y), el = poiEls[i], lab = el.lastChild, st = Math.round(p.s * k);
+        el.style.transform = `translate3d(${px}px, ${py}px, 0)`; el.style.setProperty('--stem', st + 'px');
+        const w = lab.offsetWidth || 110, flip = px + w > W - 10;
+        lab.style.left = (flip ? -w + 1 : -1) + 'px';
+        const x0 = flip ? px - w : px, top = py - st - 6 - lab.offsetHeight;
+        const side = px < 8 ? 'l' : px > W - 8 ? 'r' : under(Math.min(x0, px - 6), Math.max(x0 + w, px + 6), py + 6) ? (px < W / 2 ? 'l' : 'r') : '';
+        if (side){ away[side].push(p.n); away[side + 'y'] = Math.max(away[side + 'y'], Math.min(py, capTop - 20)); el.classList.add('off'); return; }
+        const off = x0 < 6 || top < 70 || py > H - 20;
+        el.classList.toggle('off', off);
+        if (!off) labs.push({x0, x1:x0 + w, top});
+      });
+      poiAway.l.hidden = !away.l.length; poiAway.r.hidden = !away.r.length;
+      if (away.l.length){ poiAway.l.textContent = '‹ ' + away.l.join(' · '); poiAway.l.style.top = away.ly + 'px'; }
+      if (away.r.length){ poiAway.r.textContent = away.r.join(' · ') + ' ›'; poiAway.r.style.top = away.ry + 'px'; }
+      // the Aluna pin: its card rises above any place label it would cover
+      const [tx, ty] = toScreen(GEO.site.x, GEO.site.y), card = pin.querySelector('.card');
+      const cx = clamp(tx, 24, W - 24), room = W - cx - 16, cw = card.offsetWidth, ch = card.offsetHeight;
+      const cl = cw > room ? -(cw - room) : -1;
+      let stem = Math.max(60, Math.min(120, H * .12));
+      labs.forEach(l => { if (cx + cl < l.x1 && cx + cl + cw > l.x0 && ty - stem - 14 > l.top - 8) stem = ty - 14 - (l.top - 8); });
+      stem = Math.min(stem, ty - 14 - ch - 74);
+      pin.style.transform = `translate3d(${cx}px, ${ty}px, 0)`; pin.style.setProperty('--stem', stem + 'px');
+      card.style.left = cl + 'px';
     }
-    if (pinOn !== lastPin){ pin.classList.toggle('on', pinOn); lastPin = pinOn; }
+    if (pinOn !== lastPin){ pin.classList.toggle('on', pinOn); pois.classList.toggle('on', pinOn); lastPin = pinOn; }
 
     // chapter captions and the explorer
     const chap = seg.chap || '';
